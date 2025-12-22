@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tirri Madhan | Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Courier+New&family=Orbitron:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="dark-theme">
+
+  <!-- Simple Welcome Animation -->
+  <div id="welcome-animation">
+    <h1 class="welcome-text">
+      <span id="typed-text"></span>
+      <span class="cursor">|</span>
+    </h1>
+  </div>
+
+  <div class="profile-photo">
+    <img src="profile.jpg" alt="Tirri Madhan profile photo" />
+  </div>
+
+  <nav class="side-nav" aria-label="Primary navigation">
+    <a href="#certificates">⮞ Certifications</a>
+    <a href="#skills">⮞ Skills</a>
+    <a href="#about">⮞ About Me</a>
+    <a href="#contact">⮞ Contact</a>
+  </nav>
+
+  <div class="social-links" aria-label="Social media links">
+    <a href="https://x.com/madhan_tirri" target="_blank" class="social-icon" title="Twitter"><i class="fa-brands fa-twitter"></i></a>
+    <a href="https://www.linkedin.com/in/madhan-tirri-6b8b31323" target="_blank" class="social-icon" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+    <a href="https://github.com/madhantirri" target="_blank" class="social-icon" title="GitHub"><i class="fa-brands fa-github"></i></a>
+    <a href="https://www.instagram.com/madhan_tirri" target="_blank" class="social-icon" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+  </div>
+
+  <div class="settings-container">
+    <button id="cursor-toggle-btn" aria-label="Toggle Theme Cursor" title="Toggle Theme Cursor">
+      <i class="fa-solid fa-circle-notch"></i>
+    </button>
+    
+    <button id="settings-trigger" aria-label="Open Settings">
+      <i class="fa-solid fa-ellipsis-vertical"></i>
+    </button>
+    
+    <div id="settings-dropdown" class="settings-menu">
+      <button id="theme-toggle">Light Mode</button>
+      <button id="mode-cycle-btn">🎨 Normal UI</button>
+      <button id="cursor-cycle-btn">🐭 Normal Cursor</button>
+    </div>
+  </div>
+
+  <header>
+    <h1>TIRRI MADHAN</h1>
+    <p>Computer Engineering Student | IITRAM'28 | IIT GUWAHATI'26</p>
+  </header>
+
+  <!-- CERTIFICATES SECTION -->
+<section id="certificates" class="certificates-section">
+  <div class="section-header">
+    <h2><span class="section-number">01</span> Certifications & Achievements</h2>
+    <p class="section-subtitle">Professional certifications, hackathons, and competitions that showcase my journey</p>
+    
+    <div class="stats-container">
+      <div class="stat-item">
+        <div class="stat-number" data-count="5">0</div>
+        <div class="stat-label">Total Certificates</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">2</div>
+        <div class="stat-label">Hackathons</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">2</div>
+        <div class="stat-label">Courses</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">1</div>
+        <div class="stat-label">Competitions</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Certificate Filter -->
+  <div class="certificate-filter">
+    <button class="filter-btn active" data-filter="all">
+      <i class="fas fa-layer-group"></i> All
+    </button>
+    <button class="filter-btn" data-filter="hackathon">
+      <i class="fas fa-code"></i> Hackathons
+    </button>
+    <button class="filter-btn" data-filter="course">
+      <i class="fas fa-graduation-cap"></i> Courses
+    </button>
+    <button class="filter-btn" data-filter="competition">
+      <i class="fas fa-trophy"></i> Competitions
+    </button>
+  </div>
+
+  <!-- Certificate Grid -->
+  <div class="certificates-grid">
+    <!-- Certificate 1 -->
+    <div class="certificate-card" data-category="hackathon">
+      <div class="certificate-header">
+        <div class="cert-badge hackathon-badge">Hackathon</div>
+        <div class="cert-date">Dec 2023</div>
+      </div>
+      
+      <div class="certificate-body">
+        <div class="cert-logo">
+          <img src="blix.png" alt="IIT Bombay">
+        </div>
+        <h3 class="cert-title">Blixathon IIT Bombay</h3>
+        <p class="cert-org">IIT Bombay TechFest</p>
+        <p class="cert-desc">24-hour hackathon developing IoT-based urban transportation solutions. Recognized for innovative approach to smart city challenges.</p>
+        
+        <div class="cert-tags">
+          <span class="cert-tag">IoT</span>
+          <span class="cert-tag">Machine Learning</span>
+          <span class="cert-tag">Smart Cities</span>
+        </div>
+      </div>
+      
+      <div class="certificate-footer">
+        <button class="view-full-btn" data-cert="blix">
+          <i class="fas fa-expand"></i> View Certificate
+        </button>
+      </div>
+    </div>
+
+    <!-- Certificate 2 -->
+    <div class="certificate-card" data-category="competition">
+      <div class="certificate-header">
+        <div class="cert-badge competition-badge">Competition</div>
+        <div class="cert-date">Nov 2023</div>
+      </div>
+      
+      <div class="certificate-body">
+        <div class="cert-logo">
+          <img src="bridge.png" alt="Bridge Competition">
+        </div>
+        <h3 class="cert-title">Bridge Building Competition</h3>
+        <p class="cert-org">IITRAM Engineering Week</p>
+        <p class="cert-desc">Designed and constructed a model bridge maximizing load capacity with minimal materials. Awarded for structural innovation.</p>
+        
+        <div class="cert-tags">
+          <span class="cert-tag">Structural Engineering</span>
+          <span class="cert-tag">Material Science</span>
+          <span class="cert-tag">Innovation</span>
+        </div>
+      </div>
+      
+      <div class="certificate-footer">
+        <button class="view-full-btn" data-cert="bridge">
+          <i class="fas fa-expand"></i> View Certificate
+        </button>
+      </div>
+    </div>
+
+    <!-- Certificate 3 -->
+    <div class="certificate-card" data-category="hackathon">
+      <div class="certificate-header">
+        <div class="cert-badge hackathon-badge">Hackathon</div>
+        <div class="cert-date">Oct 2023</div>
+      </div>
+      
+      <div class="certificate-body">
+        <div class="cert-logo">
+          <img src="neuracode-certificate.jpg" alt="Neuracode">
+        </div>
+        <h3 class="cert-title">Neuracode AI Hackathon</h3>
+        <p class="cert-org">Neuracode Technologies</p>
+        <p class="cert-desc">Developed an AI-powered mental health assistant prototype using NLP and machine learning algorithms in 24 hours.</p>
+        
+        <div class="cert-tags">
+          <span class="cert-tag">AI/ML</span>
+          <span class="cert-tag">NLP</span>
+          <span class="cert-tag">Mental Health Tech</span>
+        </div>
+      </div>
+      
+      <div class="certificate-footer">
+        <button class="view-full-btn" data-cert="neuracode">
+          <i class="fas fa-expand"></i> View Certificate
+        </button>
+      </div>
+    </div>
+
+    <!-- Certificate 4 -->
+    <div class="certificate-card" data-category="course">
+      <div class="certificate-header">
+        <div class="cert-badge course-badge">Course</div>
+        <div class="cert-date">Aug 2023</div>
+      </div>
+      
+      <div class="certificate-body">
+        <div class="cert-logo">
+          <img src="certificate4.jpg" alt="Web Development">
+        </div>
+        <h3 class="cert-title">Advanced Web Development</h3>
+        <p class="cert-org">Coursera Certification</p>
+        <p class="cert-desc">Comprehensive course covering HTML5, CSS3, JavaScript ES6+, React, Node.js, and database integration.</p>
+        
+        <div class="cert-tags">
+          <span class="cert-tag">Full Stack</span>
+          <span class="cert-tag">React</span>
+          <span class="cert-tag">Node.js</span>
+        </div>
+      </div>
+      
+      <div class="certificate-footer">
+        <button class="view-full-btn" data-cert="webdev">
+          <i class="fas fa-expand"></i> View Certificate
+        </button>
+      </div>
+    </div>
+
+    <!-- Certificate 5 -->
+    <div class="certificate-card" data-category="course">
+      <div class="certificate-header">
+        <div class="cert-badge course-badge">Course</div>
+        <div class="cert-date">June 2023</div>
+      </div>
+      
+      <div class="certificate-body">
+        <div class="cert-logo">
+          <img src="certificate5.jpg" alt="Machine Learning">
+        </div>
+        <h3 class="cert-title">Machine Learning Fundamentals</h3>
+        <p class="cert-org">Stanford Online</p>
+        <p class="cert-desc">Core concepts including supervised/unsupervised learning, neural networks, and practical implementation with Python.</p>
+        
+        <div class="cert-tags">
+          <span class="cert-tag">Python</span>
+          <span class="cert-tag">ML Algorithms</span>
+          <span class="cert-tag">scikit-learn</span>
+        </div>
+      </div>
+      
+      <div class="certificate-footer">
+        <button class="view-full-btn" data-cert="ml">
+          <i class="fas fa-expand"></i> View Certificate
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- View All Button -->
+  <div class="view-all-container">
+    <button class="view-all-btn" id="view-all-certificates">
+      <i class="fas fa-eye"></i> View All Certificates
+    </button>
+  </div>
+
+  <!-- Certificate Modal -->
+  <div class="certificate-modal" id="certificateModal">
+    <div class="modal-content">
+      <button class="close-modal">&times;</button>
+      <div class="modal-header">
+        <h3 class="modal-title">Certificate Details</h3>
+        <p class="modal-org">Organization</p>
+      </div>
+      
+      <div class="modal-body">
+        <div class="modal-image-container">
+          <img src="" alt="Certificate" class="modal-certificate-img">
+          <div class="modal-image-overlay">
+            <button class="download-cert-btn" id="downloadCert">
+              <i class="fas fa-download"></i> Download
+            </button>
+            <button class="share-cert-btn" id="shareCert">
+              <i class="fas fa-share-alt"></i> Share
+            </button>
+          </div>
+        </div>
+        
+        <div class="modal-details">
+          <div class="modal-info">
+            <div class="info-item">
+              <span class="info-label"><i class="fas fa-calendar"></i> Issue Date:</span>
+              <span class="info-value" id="modalDate">Month Year</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label"><i class="fas fa-id-badge"></i> Certificate ID:</span>
+              <span class="info-value" id="modalID">XXXX-XXXX-XXXX</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label"><i class="fas fa-clock"></i> Duration:</span>
+              <span class="info-value" id="modalDuration">-- hours</span>
+            </div>
+          </div>
+          
+          <div class="modal-description">
+            <h4>Description</h4>
+            <p class="modal-desc" id="modalDesc">Certificate description will appear here...</p>
+          </div>
+          
+          <div class="modal-skills">
+            <h4>Skills Acquired</h4>
+            <div class="skills-list" id="modalSkills">
+              <!-- Skills will be populated here -->
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="modal-footer">
+        <button class="modal-close-btn">Close</button>
+        <button class="modal-verify-btn">
+          <i class="fas fa-shield-check"></i> Verify Certificate
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <section id="skills">
+    <h2>Skills</h2>
+    <div class="skills-container">
+      <button class="skill-nav-btn prev-btn">&lt;</button>
+      <div class="skills-scroller">
+        <div class="skills-track">
+          <div class="skill-item"><img src="python.png" class="skill-icon" alt="Python"><span class="skill-name">Python</span></div>
+          <div class="skill-item"><img src="java.webp" class="skill-icon" alt="JavaScript"><span class="skill-name">JavaScript</span></div>
+          <div class="skill-item"><img src="html.webp" class="skill-icon" alt="HTML"><span class="skill-name">HTML</span></div>
+          <div class="skill-item"><img src="cpp.png" class="skill-icon" alt="C++"><span class="skill-name">C++</span></div>
+          <div class="skill-item"><img src="git.png" class="skill-icon" alt="Git"><span class="skill-name">Git</span></div>
+          <div class="skill-item"><img src="vscode.png" class="skill-icon" alt="VS Code"><span class="skill-name">VS Code</span></div>
+          <div class="skill-item"><img src="figma.png" class="skill-icon" alt="Figma"><span class="skill-name">Figma</span></div>
+          <div class="skill-item"><img src="premiere-pro.png" class="skill-icon" alt="Premiere Pro"><span class="skill-name">Premiere Pro</span></div>
+          <div class="skill-item"><img src="after.png" class="skill-icon" alt="After Effects"><span class="skill-name">After Effects</span></div>
+          <div class="skill-item"><img src="blender.png" class="skill-icon" alt="Blender"><span class="skill-name">Blender</span></div>
+        </div>
+      </div>
+      <button class="skill-nav-btn next-btn">&gt;</button>
+    </div>
+  </section>
+
+  <section id="about">
+    <h2>About Me</h2>
+    
+    <div class="about-container">
+      <div class="about-intro">
+        <p>Computer Engineering student passionate about technology, innovation, and creative problem-solving. Currently pursuing dual degrees with a focus on software development, AI/ML, and emerging technologies.</p>
+      </div>
+      
+      <div class="education-timeline">
+        <h3>Education</h3>
+        
+        <div class="timeline-item">
+          <div class="timeline-year">2026 (Expected)</div>
+          <div class="timeline-content">
+            <h4>Indian Institute of Technology, Guwahati</h4>
+            <p class="degree">Certificate in Data Science & AI</p>
+            <p class="details">Specializing in Machine Learning, Deep Learning, and AI applications</p>
+          </div>
+        </div>
+        
+        <div class="timeline-item">
+          <div class="timeline-year">2024 - 2028</div>
+          <div class="timeline-content">
+            <h4>Institute of Infrastructure Technology Research and Management (IITRAM), Ahmedabad</h4>
+            <p class="degree">Bachelor of Technology in Computer Engineering</p>
+            <p class="details">CGPA: 8.5/10 | Relevant Courses: Data Structures, Algorithms, Database Systems, Computer Networks</p>
+          </div>
+        </div>
+        
+        <div class="timeline-item">
+          <div class="timeline-year">2022 - 2024</div>
+          <div class="timeline-content">
+            <h4>Narayana Junior College, Hyderabad</h4>
+            <p class="degree">Intermediate Education (MPC)</p>
+            <p class="details">Board of Intermediate Education, Telangana | Percentage: 95.2%</p>
+          </div>
+        </div>
+        
+        <div class="timeline-item">
+          <div class="timeline-year">2020 - 2022</div>
+          <div class="timeline-content">
+            <h4>Sri Chaitanya School, Hyderabad</h4>
+            <p class="degree">Secondary School Education (SSC)</p>
+            <p class="details">Board of Secondary Education, Telangana | Percentage: 92.3%</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="interests-section">
+        <h3>Interests & Focus Areas</h3>
+        <div class="interests-grid">
+          <div class="interest-item">
+            <i class="fas fa-laptop-code"></i>
+            <h4>Software Development</h4>
+            <p>Full-stack web development, Mobile apps, System design</p>
+          </div>
+          <div class="interest-item">
+            <i class="fas fa-robot"></i>
+            <h4>Artificial Intelligence</h4>
+            <p>Machine Learning, Deep Learning, Computer Vision</p>
+          </div>
+          <div class="interest-item">
+            <i class="fas fa-cube"></i>
+            <h4>3D Design & Animation</h4>
+            <p>Blender, After Effects, Creative visualization</p>
+          </div>
+          <div class="interest-item">
+            <i class="fas fa-bolt"></i>
+            <h4>Emerging Tech</h4>
+            <p>IoT, Blockchain, Quantum Computing, AR/VR</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <div class="contact-info">
+      <ul>
+        <li><i class="fas fa-envelope"></i> <a href="mailto:madhantirri@example.com">madhantirri@example.com</a></li>
+        <li><i class="fas fa-phone"></i> +91 98765 43210</li>
+        <li><i class="fas fa-map-marker-alt"></i> Ahmedabad, India</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 Tirri Madhan. All rights reserved.</p>
+  </footer>
+
+  <div class="theme-bg glass-bg">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+
+  <div class="theme-bg cyberpunk-bg">
+    <div class="cyber-grid"></div>
+    <div class="cyber-lines"></div>
+  </div>
+
+  <div class="theme-bg retro-bg">
+    <div class="scanlines"></div>
+  </div>
+
+  <div class="theme-bg origami-bg">
+    <div class="paper-sky">
+      <div class="cloud cloud-1"></div>
+      <div class="cloud cloud-2"></div>
+      <div class="cloud cloud-3"></div>
+      <div class="plane-container plane-1">
+        <div class="plane-body"><div class="wing-left"></div><div class="wing-right"></div></div>
+      </div>
+      <div class="plane-container plane-2">
+        <div class="plane-body"><div class="wing-left"></div><div class="wing-right"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cursor-dot" data-cursor-dot></div>
+  <div class="cursor-outline" data-cursor-outline></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
