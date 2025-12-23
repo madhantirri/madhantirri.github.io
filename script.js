@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
   function showWelcomeAnimation() {
     if (!welcomeAnimation || !typedText) return;
     
-    const message = "My portfolio is currently under development";
+    const message = "Welcome to my Portfolio";
     let index = 0;
     const typingSpeed = 100; // Speed per character
     const totalTime = 2500; // Total display: 2.5 seconds
@@ -140,21 +140,6 @@ document.addEventListener('DOMContentLoaded', function() {
       
       updateCount();
     });
-  }
-  
-  // Trigger stats animation when certificates section is in view
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        animateStats();
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.5 });
-  
-  const certificatesSection = document.getElementById('certificates');
-  if (certificatesSection) {
-    observer.observe(certificatesSection);
   }
 
   // --- 4. CURSOR ANIMATION (For Theme Cursor) ---
@@ -360,20 +345,20 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  // --- 9. CERTIFICATE GALLERY WITH FILTERING & MODAL ---
-  const certificateModal = document.getElementById('certificateModal');
-  const modalCertificateImg = document.querySelector('.modal-certificate-img');
-  const modalTitle = document.querySelector('.modal-title');
-  const modalOrg = document.querySelector('.modal-org');
-  const modalDesc = document.getElementById('modalDesc');
-  const modalDate = document.getElementById('modalDate');
-  const modalID = document.getElementById('modalID');
-  const modalDuration = document.getElementById('modalDuration');
-  const modalSkills = document.getElementById('modalSkills');
-  const closeModalBtn = document.querySelector('.certificate-modal .close-modal');
-  const modalCloseBtn = document.querySelector('.modal-close-btn');
-  const downloadCertBtn = document.getElementById('downloadCert');
-  const shareCertBtn = document.getElementById('shareCert');
+  // --- 9. CERTIFICATE GALLERY WITH FILTERING & CENTER WIPE ---
+  const certificateWipe = document.getElementById('certificateWipe');
+  const wipeClose = document.getElementById('wipeClose');
+  const wipeImg = document.getElementById('wipeImg');
+  const wipeTitle = document.getElementById('wipeTitle');
+  const wipeOrg = document.getElementById('wipeOrg');
+  const wipeDesc = document.getElementById('wipeDesc');
+  const wipeDate = document.getElementById('wipeDate');
+  const wipeID = document.getElementById('wipeID');
+  const wipeDuration = document.getElementById('wipeDuration');
+  const wipeCategory = document.getElementById('wipeCategory');
+  const wipeSkills = document.getElementById('wipeSkills');
+  const wipeDownload = document.getElementById('wipeDownload');
+  const wipeShare = document.getElementById('wipeShare');
   const filterBtns = document.querySelectorAll('.filter-btn');
   const certificateCards = document.querySelectorAll('.certificate-card');
   const viewFullBtns = document.querySelectorAll('.view-full-btn');
@@ -389,6 +374,7 @@ document.addEventListener('DOMContentLoaded', function() {
       date: 'December 2023',
       id: 'BLX-HCK-2023-001',
       duration: '24 hours',
+      category: 'Hackathon',
       skills: ['IoT Development', 'Machine Learning', 'Problem Solving', 'Team Collaboration', 'Smart Cities'],
       downloadUrl: 'blix.png'
     },
@@ -400,6 +386,7 @@ document.addEventListener('DOMContentLoaded', function() {
       date: 'November 2023',
       id: 'BRG-CMP-2023-002',
       duration: '2 weeks',
+      category: 'Competition',
       skills: ['Structural Design', 'Material Science', 'CAD Modeling', 'Innovation', 'Engineering Principles'],
       downloadUrl: 'bridge.png'
     },
@@ -411,6 +398,7 @@ document.addEventListener('DOMContentLoaded', function() {
       date: 'October 2023',
       id: 'NRC-AI-2023-003',
       duration: '24 hours',
+      category: 'Hackathon',
       skills: ['Artificial Intelligence', 'Natural Language Processing', 'Machine Learning', 'Mental Health Tech', 'Prototyping'],
       downloadUrl: 'neuracode-certificate.jpg'
     },
@@ -422,6 +410,7 @@ document.addEventListener('DOMContentLoaded', function() {
       date: 'August 2023',
       id: 'WEB-DEV-2023-004',
       duration: '120 hours',
+      category: 'Course',
       skills: ['HTML5/CSS3', 'JavaScript ES6+', 'React.js', 'Node.js', 'Database Integration', 'Responsive Design'],
       downloadUrl: 'certificate4.jpg'
     },
@@ -433,6 +422,7 @@ document.addEventListener('DOMContentLoaded', function() {
       date: 'June 2023',
       id: 'ML-FND-2023-005',
       duration: '80 hours',
+      category: 'Course',
       skills: ['Python Programming', 'Supervised Learning', 'Unsupervised Learning', 'Neural Networks', 'scikit-learn', 'Data Analysis'],
       downloadUrl: 'certificate5.jpg'
     }
@@ -453,48 +443,69 @@ document.addEventListener('DOMContentLoaded', function() {
         certificateCards.forEach(card => {
           if (filter === 'all' || card.dataset.category === filter) {
             card.style.display = 'flex';
-            // Add animation
-            card.style.animation = 'none';
+            // Reset animation state
+            card.classList.remove('animate-in');
+            const index = Array.from(certificateCards).indexOf(card);
+            if (index % 2 === 0) {
+              card.style.transform = 'translateX(-150px) translateY(20px) rotate(-2deg)';
+            } else {
+              card.style.transform = 'translateX(150px) translateY(20px) rotate(2deg)';
+            }
+            card.style.opacity = '0';
+            
+            // Re-animate after filter
             setTimeout(() => {
-              card.style.animation = 'fadeInUp 0.6s ease-out forwards';
-            }, 10);
+              const visibleCards = Array.from(document.querySelectorAll('.certificate-card')).filter(c => 
+                c.style.display !== 'none' && c.style.display !== ''
+              );
+              const cardIndex = visibleCards.indexOf(card);
+              if (cardIndex > -1) {
+                setTimeout(() => {
+                  card.classList.add('animate-in');
+                  card.style.opacity = '1';
+                  card.style.transform = 'translateX(0) translateY(0) rotate(0deg)';
+                }, cardIndex * 300);
+              }
+            }, 50);
           } else {
             card.style.display = 'none';
+            card.classList.remove('animate-in');
           }
         });
       });
     });
   }
 
-  // Open certificate modal
-  if (viewFullBtns.length > 0) {
-    viewFullBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const certId = btn.dataset.cert;
+  // Open certificate with center wipe
+  if (certificateCards.length > 0) {
+    certificateCards.forEach(card => {
+      card.addEventListener('click', () => {
+        const certId = card.querySelector('.view-full-btn').dataset.cert;
         const certData = certificateData[certId];
         
         if (certData) {
-          modalTitle.textContent = certData.title;
-          modalOrg.textContent = certData.org;
-          modalDesc.textContent = certData.desc;
-          modalDate.textContent = certData.date;
-          modalID.textContent = certData.id;
-          modalDuration.textContent = certData.duration;
-          modalCertificateImg.src = certData.image;
-          modalCertificateImg.alt = certData.title;
+          wipeImg.src = certData.image;
+          wipeImg.alt = certData.title;
+          wipeTitle.textContent = certData.title;
+          wipeOrg.textContent = certData.org;
+          wipeDesc.textContent = certData.desc;
+          wipeDate.textContent = certData.date;
+          wipeID.textContent = certData.id;
+          wipeDuration.textContent = certData.duration;
+          wipeCategory.textContent = certData.category;
           
           // Update skills list
-          modalSkills.innerHTML = '';
+          wipeSkills.innerHTML = '';
           certData.skills.forEach(skill => {
             const skillTag = document.createElement('span');
             skillTag.className = 'skill-tag';
             skillTag.textContent = skill;
-            modalSkills.appendChild(skillTag);
+            wipeSkills.appendChild(skillTag);
           });
           
           // Update download button
-          if (downloadCertBtn) {
-            downloadCertBtn.onclick = () => {
+          if (wipeDownload) {
+            wipeDownload.onclick = () => {
               const link = document.createElement('a');
               link.href = certData.downloadUrl;
               link.download = `${certData.title.replace(/\s+/g, '_')}_certificate.jpg`;
@@ -505,8 +516,8 @@ document.addEventListener('DOMContentLoaded', function() {
           }
           
           // Update share button
-          if (shareCertBtn) {
-            shareCertBtn.onclick = () => {
+          if (wipeShare) {
+            wipeShare.onclick = () => {
               if (navigator.share) {
                 navigator.share({
                   title: certData.title,
@@ -521,9 +532,21 @@ document.addEventListener('DOMContentLoaded', function() {
             };
           }
           
-          certificateModal.style.display = 'flex';
+          // Show wipe transition
+          certificateWipe.classList.add('active');
           document.body.style.overflow = 'hidden';
         }
+      });
+    });
+  }
+
+  // Also keep view full buttons working for compatibility
+  if (viewFullBtns.length > 0) {
+    viewFullBtns.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation(); // Prevent card click from triggering
+        const card = btn.closest('.certificate-card');
+        card.click(); // Trigger the card click event
       });
     });
   }
@@ -536,44 +559,55 @@ document.addEventListener('DOMContentLoaded', function() {
       
       certificateCards.forEach(card => {
         card.style.display = 'flex';
-        card.style.animation = 'none';
-        setTimeout(() => {
-          card.style.animation = 'fadeInUp 0.6s ease-out forwards';
-        }, 10);
+        card.classList.remove('animate-in');
+        const index = Array.from(certificateCards).indexOf(card);
+        if (index % 2 === 0) {
+          card.style.transform = 'translateX(-150px) translateY(20px) rotate(-2deg)';
+        } else {
+          card.style.transform = 'translateX(150px) translateY(20px) rotate(2deg)';
+        }
+        card.style.opacity = '0';
       });
+      
+      // Animate all cards one by one
+      setTimeout(() => {
+        certificateCards.forEach((card, index) => {
+          setTimeout(() => {
+            card.classList.add('animate-in');
+            card.style.opacity = '1';
+            card.style.transform = 'translateX(0) translateY(0) rotate(0deg)';
+          }, index * 300);
+        });
+      }, 50);
       
       // Scroll to certificates section
       certificatesSection.scrollIntoView({ behavior: 'smooth' });
     });
   }
 
-  // Close modal functions
-  function closeModal() {
-    certificateModal.style.display = 'none';
+  // Close wipe functions
+  function closeWipe() {
+    certificateWipe.classList.remove('active');
     document.body.style.overflow = 'auto';
   }
 
-  if (closeModalBtn) {
-    closeModalBtn.addEventListener('click', closeModal);
+  if (wipeClose) {
+    wipeClose.addEventListener('click', closeWipe);
   }
 
-  if (modalCloseBtn) {
-    modalCloseBtn.addEventListener('click', closeModal);
-  }
-
-  // Close modal when clicking outside
-  if (certificateModal) {
-    certificateModal.addEventListener('click', (e) => {
-      if (e.target === certificateModal) {
-        closeModal();
+  // Close wipe when clicking outside
+  if (certificateWipe) {
+    certificateWipe.addEventListener('click', (e) => {
+      if (e.target === certificateWipe) {
+        closeWipe();
       }
     });
   }
 
-  // Close modal with Escape key
+  // Close wipe with Escape key
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && certificateModal.style.display === 'flex') {
-      closeModal();
+    if (e.key === 'Escape' && certificateWipe.classList.contains('active')) {
+      closeWipe();
     }
   });
 
@@ -657,4 +691,184 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   });
+
+  // === 12. CERTIFICATE SCROLL ANIMATIONS - ONE BY ONE ZIGZAG ===
+  function initCertificateAnimations() {
+    const certificatesSection = document.getElementById('certificates');
+    if (!certificatesSection) return;
+    
+    const certificateCards = document.querySelectorAll('.certificate-card');
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const statItems = document.querySelectorAll('.stat-item');
+    const sectionHeader = document.querySelector('.section-header h2');
+    const sectionSubtitle = document.querySelector('.section-subtitle');
+    const viewAllContainer = document.querySelector('.view-all-container');
+    
+    // Reset all certificates to initial hidden state
+    certificateCards.forEach((card, index) => {
+      card.classList.remove('animate-in');
+      card.style.opacity = '0';
+      card.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+      
+      // Set initial zigzag positions
+      if (index % 2 === 0) {
+        // Even index (0, 2, 4...): slide from left
+        card.style.transform = 'translateX(-150px) translateY(20px) rotate(-2deg)';
+      } else {
+        // Odd index (1, 3, 5...): slide from right
+        card.style.transform = 'translateX(150px) translateY(20px) rotate(2deg)';
+      }
+    });
+    
+    // Create Intersection Observer
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const section = entry.target;
+          
+          if (section.id === 'certificates') {
+            // Add in-view class for section fade-in
+            section.classList.add('in-view');
+            
+            // Animate header
+            setTimeout(() => {
+              if (sectionHeader) {
+                sectionHeader.style.opacity = '0';
+                sectionHeader.style.transform = 'translateY(-30px)';
+                sectionHeader.classList.add('animate-in');
+              }
+            }, 100);
+            
+            // Animate subtitle
+            setTimeout(() => {
+              if (sectionSubtitle) {
+                sectionSubtitle.style.opacity = '0';
+                sectionSubtitle.style.transform = 'translateY(20px)';
+                sectionSubtitle.classList.add('animate-in');
+              }
+            }, 300);
+            
+            // Animate stats
+            setTimeout(() => {
+              statItems.forEach((stat, index) => {
+                setTimeout(() => {
+                  stat.style.opacity = '0';
+                  stat.style.transform = 'translateY(30px)';
+                  stat.classList.add('animate-in');
+                }, index * 100);
+              });
+            }, 500);
+            
+            // Animate filter buttons
+            setTimeout(() => {
+              filterButtons.forEach((btn, index) => {
+                setTimeout(() => {
+                  btn.style.opacity = '0';
+                  btn.style.transform = 'translateY(20px)';
+                  btn.classList.add('animate-in');
+                }, index * 100);
+              });
+            }, 700);
+            
+            // Animate certificate cards ONE BY ONE with zigzag pattern
+            setTimeout(() => {
+              animateCertificatesOneByOne();
+            }, 900);
+            
+            // Animate view all button (after all certificates)
+            const totalAnimationTime = certificateCards.length * 300 + 1200;
+            setTimeout(() => {
+              if (viewAllContainer) {
+                viewAllContainer.style.opacity = '0';
+                viewAllContainer.style.transform = 'translateY(40px)';
+                viewAllContainer.classList.add('animate-in');
+              }
+            }, totalAnimationTime);
+            
+            // Start stats counter animation
+            animateStats();
+            
+            // Unobserve after animation starts
+            observer.unobserve(section);
+          }
+        }
+      });
+    }, {
+      threshold: 0.15, // Trigger when 15% of the section is visible
+      rootMargin: '0px 0px -100px 0px' // Trigger 100px before the section
+    });
+    
+    // Observe the certificates section
+    observer.observe(certificatesSection);
+    
+    // Re-animate filtered certificates
+    if (filterButtons.length > 0) {
+      filterButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          // Remove animation class from all cards
+          certificateCards.forEach(card => {
+            card.classList.remove('animate-in');
+            // Reset transform for hidden cards
+            const index = Array.from(certificateCards).indexOf(card);
+            if (card.style.display === 'none' || card.style.display === '') {
+              if (index % 2 === 0) {
+                card.style.transform = 'translateX(-150px) translateY(20px) rotate(-2deg)';
+              } else {
+                card.style.transform = 'translateX(150px) translateY(20px) rotate(2deg)';
+              }
+              card.style.opacity = '0';
+            }
+          });
+          
+          // Re-add animation class to visible cards ONE BY ONE
+          setTimeout(() => {
+            const visibleCards = Array.from(document.querySelectorAll('.certificate-card')).filter(card => 
+              card.style.display !== 'none' && card.style.display !== ''
+            );
+            
+            visibleCards.forEach((card, index) => {
+              setTimeout(() => {
+                card.classList.add('animate-in');
+                card.style.opacity = '1';
+                card.style.transform = 'translateX(0) translateY(0) rotate(0deg)';
+              }, index * 300); // 300ms delay between each card
+            });
+          }, 100);
+        });
+      });
+    }
+  }
+  
+  // Function to animate certificates one by one
+  function animateCertificatesOneByOne() {
+    const certificateCards = document.querySelectorAll('.certificate-card');
+    
+    // Reset all cards to hidden (just in case)
+    certificateCards.forEach((card, index) => {
+      card.classList.remove('animate-in');
+      card.style.opacity = '0';
+      card.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+      
+      // Set initial zigzag positions
+      if (index % 2 === 0) {
+        // Even index (0, 2, 4...): slide from left
+        card.style.transform = 'translateX(-150px) translateY(20px) rotate(-2deg)';
+      } else {
+        // Odd index (1, 3, 5...): slide from right
+        card.style.transform = 'translateX(150px) translateY(20px) rotate(2deg)';
+      }
+    });
+    
+    // Animate each card one by one with delay
+    certificateCards.forEach((card, index) => {
+      setTimeout(() => {
+        card.classList.add('animate-in');
+        card.style.opacity = '1';
+        card.style.transform = 'translateX(0) translateY(0) rotate(0deg)';
+      }, index * 300); // 300ms delay between each card
+    });
+  }
+  
+  // Initialize certificate animations
+  initCertificateAnimations();
 });
