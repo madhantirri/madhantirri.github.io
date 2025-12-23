@@ -253,67 +253,6 @@
       <i class="fas fa-eye"></i> View All Certificates
     </button>
   </div>
-
-  <!-- Certificate Modal -->
-  <div class="certificate-modal" id="certificateModal">
-    <div class="modal-content">
-      <button class="close-modal">&times;</button>
-      <div class="modal-header">
-        <h3 class="modal-title">Certificate Details</h3>
-        <p class="modal-org">Organization</p>
-      </div>
-      
-      <div class="modal-body">
-        <div class="modal-image-container">
-          <img src="" alt="Certificate" class="modal-certificate-img">
-          <div class="modal-image-overlay">
-            <button class="download-cert-btn" id="downloadCert">
-              <i class="fas fa-download"></i> Download
-            </button>
-            <button class="share-cert-btn" id="shareCert">
-              <i class="fas fa-share-alt"></i> Share
-            </button>
-          </div>
-        </div>
-        
-        <div class="modal-details">
-          <div class="modal-info">
-            <div class="info-item">
-              <span class="info-label"><i class="fas fa-calendar"></i> Issue Date:</span>
-              <span class="info-value" id="modalDate">Month Year</span>
-            </div>
-            <div class="info-item">
-              <span class="info-label"><i class="fas fa-id-badge"></i> Certificate ID:</span>
-              <span class="info-value" id="modalID">XXXX-XXXX-XXXX</span>
-            </div>
-            <div class="info-item">
-              <span class="info-label"><i class="fas fa-clock"></i> Duration:</span>
-              <span class="info-value" id="modalDuration">-- hours</span>
-            </div>
-          </div>
-          
-          <div class="modal-description">
-            <h4>Description</h4>
-            <p class="modal-desc" id="modalDesc">Certificate description will appear here...</p>
-          </div>
-          
-          <div class="modal-skills">
-            <h4>Skills Acquired</h4>
-            <div class="skills-list" id="modalSkills">
-              <!-- Skills will be populated here -->
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <div class="modal-footer">
-        <button class="modal-close-btn">Close</button>
-        <button class="modal-verify-btn">
-          <i class="fas fa-shield-check"></i> Verify Certificate
-        </button>
-      </div>
-    </div>
-  </div>
 </section>
 
   <section id="skills">
@@ -370,7 +309,7 @@
         <div class="timeline-item">
           <div class="timeline-year">2022 - 2024</div>
           <div class="timeline-content">
-            <h4>Ascent Junior College, Visakhapatnam</h4>
+            <h4>Narayana Junior College, Hyderabad</h4>
             <p class="degree">Intermediate Education (MPC)</p>
             <p class="details">Board of Intermediate Education, Telangana | Percentage: 95.2%</p>
           </div>
@@ -379,7 +318,7 @@
         <div class="timeline-item">
           <div class="timeline-year">2020 - 2022</div>
           <div class="timeline-content">
-            <h4>KKR Gowtham High School, Visakhapatnam</h4>
+            <h4>Sri Chaitanya School, Hyderabad</h4>
             <p class="degree">Secondary School Education (SSC)</p>
             <p class="details">Board of Secondary Education, Telangana | Percentage: 92.3%</p>
           </div>
@@ -428,6 +367,56 @@
   <footer>
     <p>© 2025 Tirri Madhan. All rights reserved.</p>
   </footer>
+
+  <!-- CENTER WIPE TRANSITION FOR CERTIFICATES -->
+  <div class="certificate-wipe" id="certificateWipe">
+    <div class="wipe-close" id="wipeClose">&times;</div>
+    
+    <div class="wipe-left">
+      <img id="wipeImg" alt="Certificate">
+    </div>
+    
+    <div class="wipe-right">
+      <h2 id="wipeTitle">Certificate Title</h2>
+      <h3 id="wipeOrg">Organization</h3>
+      <p class="wipe-desc" id="wipeDesc">Certificate description will appear here...</p>
+      
+      <div class="wipe-details">
+        <div class="detail-item">
+          <h4>Issue Date</h4>
+          <p id="wipeDate">Month Year</p>
+        </div>
+        <div class="detail-item">
+          <h4>Certificate ID</h4>
+          <p id="wipeID">XXXX-XXXX-XXXX</p>
+        </div>
+        <div class="detail-item">
+          <h4>Duration</h4>
+          <p id="wipeDuration">-- hours</p>
+        </div>
+        <div class="detail-item">
+          <h4>Category</h4>
+          <p id="wipeCategory">Category</p>
+        </div>
+      </div>
+      
+      <div class="wipe-skills">
+        <h4>Skills Acquired</h4>
+        <div class="wipe-skills-list" id="wipeSkills">
+          <!-- Skills will be populated here -->
+        </div>
+      </div>
+      
+      <div class="wipe-actions">
+        <button class="wipe-download-btn" id="wipeDownload">
+          <i class="fas fa-download"></i> Download Certificate
+        </button>
+        <button class="wipe-share-btn" id="wipeShare">
+          <i class="fas fa-share-alt"></i> Share
+        </button>
+      </div>
+    </div>
+  </div>
 
   <div class="theme-bg glass-bg">
     <div class="blob blob-1"></div>
