@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
   function showWelcomeAnimation() {
     if (!welcomeAnimation || !typedText) return;
     
-    const message = "Portfolio still in Process...";
+    const message = "My portfolio is currently under development";
     let index = 0;
     const typingSpeed = 100; // Speed per character
     const totalTime = 2500; // Total display: 2.5 seconds
