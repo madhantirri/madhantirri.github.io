@@ -7,10 +7,10 @@ document.addEventListener('DOMContentLoaded', function() {
   function showWelcomeAnimation() {
     if (!welcomeAnimation || !typedText) return;
     
-    const message = "Welcome to my Portfolio still in Process...";
+    const message = "Portfolio still in Process...";
     let index = 0;
     const typingSpeed = 100; // Speed per character
-    const totalTime = 3500; // Total display: 2.5 seconds
+    const totalTime = 2500; // Total display: 2.5 seconds
     
     // Calculate typing duration
     const typingDuration = message.length * typingSpeed;
