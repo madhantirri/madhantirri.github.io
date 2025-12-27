@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Tirri Madhan | Portfolio</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Courier+New&family=Orbitron:wght@400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
@@ -10,7 +10,6 @@
 </head>
 <body class="dark-theme">
 
-  <!-- Simple Welcome Animation -->
   <div id="welcome-animation">
     <h1 class="welcome-text">
       <span id="typed-text"></span>
@@ -22,13 +21,9 @@
     <img src="profile.jpg" alt="Tirri Madhan profile photo" />
   </div>
 
-  <nav class="side-nav" aria-label="Primary navigation">
-    <a href="#certificates">⮞ Certifications</a>
-    <a href="#skills">⮞ Skills</a>
-    <a href="#about">⮞ About Me</a>
-    <a href="#contact">⮞ Contact</a>
-  </nav>
-
+  <!-- Remove floating navigation -->
+  
+  <!-- Keep the old social links -->
   <div class="social-links" aria-label="Social media links">
     <a href="https://x.com/madhan_tirri" target="_blank" class="social-icon" title="Twitter"><i class="fa-brands fa-twitter"></i></a>
     <a href="https://www.linkedin.com/in/madhan-tirri-6b8b31323" target="_blank" class="social-icon" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
@@ -36,19 +31,26 @@
     <a href="https://www.instagram.com/madhan_tirri" target="_blank" class="social-icon" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
   </div>
 
+  <!-- Updated Settings Container with Navigation -->
   <div class="settings-container">
-    <button id="cursor-toggle-btn" aria-label="Toggle Theme Cursor" title="Toggle Theme Cursor">
-      <i class="fa-solid fa-circle-notch"></i>
-    </button>
+    <!-- Navigation Links in Single Line -->
+    <nav class="top-nav" aria-label="Main navigation">
+      <a href="#certificates">certificates/></a>
+      <a href="#skills">skills/></a>
+      <a href="#about">about me/></a>
+      <a href="#contact">contact/></a>
+    </nav>
     
+    <!-- Settings Trigger (3 dots) -->
     <button id="settings-trigger" aria-label="Open Settings">
       <i class="fa-solid fa-ellipsis-vertical"></i>
     </button>
     
+    <!-- Settings Dropdown Menu -->
     <div id="settings-dropdown" class="settings-menu">
+      <!-- Mobile navigation will be inserted here by JS -->
       <button id="theme-toggle">Light Mode</button>
       <button id="mode-cycle-btn">🎨 Normal UI</button>
-      <button id="cursor-cycle-btn">🐭 Normal Cursor</button>
     </div>
   </div>
 
@@ -57,204 +59,179 @@
     <p>Computer Engineering Student | IITRAM'28 | IIT GUWAHATI'26</p>
   </header>
 
-  <!-- CERTIFICATES SECTION -->
-<section id="certificates" class="certificates-section">
-  <div class="section-header">
-    <h2><span class="section-number">01</span> Certifications & Achievements</h2>
-    <p class="section-subtitle">Professional certifications, hackathons, and competitions that showcase my journey</p>
+  <section id="certificates">
+    <div class="section-header-left">
+      <h2 class="hero-title">Selected<br>Works</h2>
+      <p class="hero-subtitle">A collection of hackathons, competitions & certifications.</p>
+    </div>
+
+    <div class="cert-3d-grid">
+      
+      <div class="cert-item item-left">
+        <div class="cert-content-wrapper">
+          <div class="cert-meta">
+            <span class="cert-num">00</span>
+            <h3 class="cert-name">Blixathon<br>IIT Bombay</h3>
+            <div class="cert-line"></div>
+          </div>
+          <div class="cert-card-3d">
+            <div class="cert-card-front">
+              <div class="cert-badge hackathon-badge">Hackathon</div>
+              <div class="cert-img-container">
+                <img src="blix.png" alt="Blixathon Certificate" class="cert-img">
+              </div>
+              <div class="cert-glow"></div>
+            </div>
+            <div class="cert-card-back">
+              <h4>Blixathon IIT Bombay</h4>
+              <p>National-level hackathon focused on innovative tech solutions</p>
+              <div class="cert-flip-icon">🔄</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cert-item item-right">
+        <div class="cert-content-wrapper reverse-layout">
+          <div class="cert-card-3d">
+            <div class="cert-card-front">
+              <div class="cert-badge competition-badge">Competition</div>
+              <div class="cert-img-container">
+                <img src="bridge.png" alt="Bridge Building" class="cert-img">
+              </div>
+              <div class="cert-glow"></div>
+            </div>
+            <div class="cert-card-back">
+              <h4>Bridge Building</h4>
+              <p>Structural engineering competition showcasing design excellence</p>
+              <div class="cert-flip-icon">🔄</div>
+            </div>
+          </div>
+          <div class="cert-meta">
+            <span class="cert-num">01</span>
+            <h3 class="cert-name">Bridge<br>Building</h3>
+            <div class="cert-line"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cert-item item-left">
+        <div class="cert-content-wrapper">
+          <div class="cert-meta">
+            <span class="cert-num">02</span>
+            <h3 class="cert-name">Neuracode<br>AI</h3>
+            <div class="cert-line"></div>
+          </div>
+          <div class="cert-card-3d">
+            <div class="cert-card-front">
+              <div class="cert-badge hackathon-badge">Hackathon</div>
+              <div class="cert-img-container">
+                <img src="neuracode-certificate.jpg" alt="Neuracode" class="cert-img">
+              </div>
+              <div class="cert-glow"></div>
+            </div>
+            <div class="cert-card-back">
+              <h4>Neuracode AI</h4>
+              <p>AI-powered solutions for neurological disorder detection</p>
+              <div class="cert-flip-icon">🔄</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cert-item item-right">
+        <div class="cert-content-wrapper reverse-layout">
+          <div class="cert-card-3d">
+            <div class="cert-card-front">
+              <div class="cert-badge course-badge">Course</div>
+              <div class="cert-img-container">
+                <img src="certificate4.jpg" alt="Web Dev" class="cert-img">
+              </div>
+              <div class="cert-glow"></div>
+            </div>
+            <div class="cert-card-back">
+              <h4>Web Dev Advanced</h4>
+              <p>Comprehensive full-stack web development certification</p>
+              <div class="cert-flip-icon">🔄</div>
+            </div>
+          </div>
+          <div class="cert-meta">
+            <span class="cert-num">03</span>
+            <h3 class="cert-name">Web Dev<br>Advanced</h3>
+            <div class="cert-line"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cert-item item-left">
+        <div class="cert-content-wrapper">
+          <div class="cert-meta">
+            <span class="cert-num">04</span>
+            <h3 class="cert-name">Machine<br>Learning</h3>
+            <div class="cert-line"></div>
+          </div>
+          <div class="cert-card-3d">
+            <div class="cert-card-front">
+              <div class="cert-badge course-badge">Course</div>
+              <div class="cert-img-container">
+                <img src="certificate5.jpg" alt="ML" class="cert-img">
+              </div>
+              <div class="cert-glow"></div>
+            </div>
+            <div class="cert-card-back">
+              <h4>Machine Learning</h4>
+              <p>Advanced ML and deep learning specialization</p>
+              <div class="cert-flip-icon">🔄</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Certificate Details Modal -->
+<div id="cert-modal" class="cert-modal">
+  <div class="cert-modal-content">
+    <button class="cert-modal-close">&times;</button>
+    <div class="cert-modal-body">
+      <div class="cert-modal-image">
+        <img id="modal-cert-img" src="" alt="Certificate">
+      </div>
+      <div class="cert-modal-info">
+        <span id="modal-cert-badge" class="cert-modal-badge"></span>
+        <h2 id="modal-cert-title"></h2>
+        <p id="modal-cert-description"></p>
+        <div class="cert-modal-meta">
+          <div class="meta-item">
+            <i class="fas fa-calendar-alt"></i>
+            <span id="modal-cert-date"></span>
+          </div>
+          <div class="meta-item">
+            <i class="fas fa-award"></i>
+            <span id="modal-cert-issuer"></span>
+          </div>
+          <div class="meta-item">
+            <i class="fas fa-clock"></i>
+            <span id="modal-cert-duration"></span>
+          </div>
+        </div>
+        <div class="cert-modal-skills">
+          <h4>Skills Gained:</h4>
+          <div id="modal-cert-skills" class="skills-tags"></div>
+        </div>
+        <a id="modal-cert-link" href="#" target="_blank" class="cert-modal-link">
+          <i class="fas fa-external-link-alt"></i>
+          View Certificate
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
     
-    <div class="stats-container">
-      <div class="stat-item">
-        <div class="stat-number" data-count="5">0</div>
-        <div class="stat-label">Total Certificates</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number">2</div>
-        <div class="stat-label">Hackathons</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number">2</div>
-        <div class="stat-label">Courses</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number">1</div>
-        <div class="stat-label">Competitions</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Certificate Filter -->
-  <div class="certificate-filter">
-    <button class="filter-btn active" data-filter="all">
-      <i class="fas fa-layer-group"></i> All
-    </button>
-    <button class="filter-btn" data-filter="hackathon">
-      <i class="fas fa-code"></i> Hackathons
-    </button>
-    <button class="filter-btn" data-filter="course">
-      <i class="fas fa-graduation-cap"></i> Courses
-    </button>
-    <button class="filter-btn" data-filter="competition">
-      <i class="fas fa-trophy"></i> Competitions
-    </button>
-  </div>
-
-  <!-- Certificate Grid -->
-  <div class="certificates-grid">
-    <!-- Certificate 1 -->
-    <div class="certificate-card" data-category="hackathon">
-      <div class="certificate-header">
-        <div class="cert-badge hackathon-badge">Hackathon</div>
-        <div class="cert-date">Dec 2023</div>
-      </div>
-      
-      <div class="certificate-body">
-        <div class="cert-logo">
-          <img src="blix.png" alt="IIT Bombay">
-        </div>
-        <h3 class="cert-title">Blixathon IIT Bombay</h3>
-        <p class="cert-org">IIT Bombay TechFest</p>
-        <p class="cert-desc">24-hour hackathon developing IoT-based urban transportation solutions. Recognized for innovative approach to smart city challenges.</p>
-        
-        <div class="cert-tags">
-          <span class="cert-tag">IoT</span>
-          <span class="cert-tag">Machine Learning</span>
-          <span class="cert-tag">Smart Cities</span>
-        </div>
-      </div>
-      
-      <div class="certificate-footer">
-        <button class="view-full-btn" data-cert="blix">
-          <i class="fas fa-expand"></i> View Certificate
-        </button>
-      </div>
-    </div>
-
-    <!-- Certificate 2 -->
-    <div class="certificate-card" data-category="competition">
-      <div class="certificate-header">
-        <div class="cert-badge competition-badge">Competition</div>
-        <div class="cert-date">Nov 2023</div>
-      </div>
-      
-      <div class="certificate-body">
-        <div class="cert-logo">
-          <img src="bridge.png" alt="Bridge Competition">
-        </div>
-        <h3 class="cert-title">Bridge Building Competition</h3>
-        <p class="cert-org">IITRAM Engineering Week</p>
-        <p class="cert-desc">Designed and constructed a model bridge maximizing load capacity with minimal materials. Awarded for structural innovation.</p>
-        
-        <div class="cert-tags">
-          <span class="cert-tag">Structural Engineering</span>
-          <span class="cert-tag">Material Science</span>
-          <span class="cert-tag">Innovation</span>
-        </div>
-      </div>
-      
-      <div class="certificate-footer">
-        <button class="view-full-btn" data-cert="bridge">
-          <i class="fas fa-expand"></i> View Certificate
-        </button>
-      </div>
-    </div>
-
-    <!-- Certificate 3 -->
-    <div class="certificate-card" data-category="hackathon">
-      <div class="certificate-header">
-        <div class="cert-badge hackathon-badge">Hackathon</div>
-        <div class="cert-date">Oct 2023</div>
-      </div>
-      
-      <div class="certificate-body">
-        <div class="cert-logo">
-          <img src="neuracode-certificate.jpg" alt="Neuracode">
-        </div>
-        <h3 class="cert-title">Neuracode AI Hackathon</h3>
-        <p class="cert-org">Neuracode Technologies</p>
-        <p class="cert-desc">Developed an AI-powered mental health assistant prototype using NLP and machine learning algorithms in 24 hours.</p>
-        
-        <div class="cert-tags">
-          <span class="cert-tag">AI/ML</span>
-          <span class="cert-tag">NLP</span>
-          <span class="cert-tag">Mental Health Tech</span>
-        </div>
-      </div>
-      
-      <div class="certificate-footer">
-        <button class="view-full-btn" data-cert="neuracode">
-          <i class="fas fa-expand"></i> View Certificate
-        </button>
-      </div>
-    </div>
-
-    <!-- Certificate 4 -->
-    <div class="certificate-card" data-category="course">
-      <div class="certificate-header">
-        <div class="cert-badge course-badge">Course</div>
-        <div class="cert-date">Aug 2023</div>
-      </div>
-      
-      <div class="certificate-body">
-        <div class="cert-logo">
-          <img src="certificate4.jpg" alt="Web Development">
-        </div>
-        <h3 class="cert-title">Advanced Web Development</h3>
-        <p class="cert-org">Coursera Certification</p>
-        <p class="cert-desc">Comprehensive course covering HTML5, CSS3, JavaScript ES6+, React, Node.js, and database integration.</p>
-        
-        <div class="cert-tags">
-          <span class="cert-tag">Full Stack</span>
-          <span class="cert-tag">React</span>
-          <span class="cert-tag">Node.js</span>
-        </div>
-      </div>
-      
-      <div class="certificate-footer">
-        <button class="view-full-btn" data-cert="webdev">
-          <i class="fas fa-expand"></i> View Certificate
-        </button>
-      </div>
-    </div>
-
-    <!-- Certificate 5 -->
-    <div class="certificate-card" data-category="course">
-      <div class="certificate-header">
-        <div class="cert-badge course-badge">Course</div>
-        <div class="cert-date">June 2023</div>
-      </div>
-      
-      <div class="certificate-body">
-        <div class="cert-logo">
-          <img src="certificate5.jpg" alt="Machine Learning">
-        </div>
-        <h3 class="cert-title">Machine Learning Fundamentals</h3>
-        <p class="cert-org">Stanford Online</p>
-        <p class="cert-desc">Core concepts including supervised/unsupervised learning, neural networks, and practical implementation with Python.</p>
-        
-        <div class="cert-tags">
-          <span class="cert-tag">Python</span>
-          <span class="cert-tag">ML Algorithms</span>
-          <span class="cert-tag">scikit-learn</span>
-        </div>
-      </div>
-      
-      <div class="certificate-footer">
-        <button class="view-full-btn" data-cert="ml">
-          <i class="fas fa-expand"></i> View Certificate
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- View All Button -->
-  <div class="view-all-container">
-    <button class="view-all-btn" id="view-all-certificates">
-      <i class="fas fa-eye"></i> View All Certificates
-    </button>
-  </div>
-</section>
-
+    <!-- Decorative corner elements -->
+    <div class="corner-decoration corner-top-left"></div>
+    <div class="corner-decoration corner-bottom-right"></div>
+  </section>
+  
   <section id="skills">
     <h2>Skills</h2>
     <div class="skills-container">
@@ -324,32 +301,6 @@
           </div>
         </div>
       </div>
-      
-      <div class="interests-section">
-        <h3>Interests & Focus Areas</h3>
-        <div class="interests-grid">
-          <div class="interest-item">
-            <i class="fas fa-laptop-code"></i>
-            <h4>Software Development</h4>
-            <p>Full-stack web development, Mobile apps, System design</p>
-          </div>
-          <div class="interest-item">
-            <i class="fas fa-robot"></i>
-            <h4>Artificial Intelligence</h4>
-            <p>Machine Learning, Deep Learning, Computer Vision</p>
-          </div>
-          <div class="interest-item">
-            <i class="fas fa-cube"></i>
-            <h4>3D Design & Animation</h4>
-            <p>Blender, After Effects, Creative visualization</p>
-          </div>
-          <div class="interest-item">
-            <i class="fas fa-bolt"></i>
-            <h4>Emerging Tech</h4>
-            <p>IoT, Blockchain, Quantum Computing, AR/VR</p>
-          </div>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -368,56 +319,7 @@
     <p>© 2025 Tirri Madhan. All rights reserved.</p>
   </footer>
 
-  <!-- CENTER WIPE TRANSITION FOR CERTIFICATES -->
-  <div class="certificate-wipe" id="certificateWipe">
-    <div class="wipe-close" id="wipeClose">&times;</div>
-    
-    <div class="wipe-left">
-      <img id="wipeImg" alt="Certificate">
-    </div>
-    
-    <div class="wipe-right">
-      <h2 id="wipeTitle">Certificate Title</h2>
-      <h3 id="wipeOrg">Organization</h3>
-      <p class="wipe-desc" id="wipeDesc">Certificate description will appear here...</p>
-      
-      <div class="wipe-details">
-        <div class="detail-item">
-          <h4>Issue Date</h4>
-          <p id="wipeDate">Month Year</p>
-        </div>
-        <div class="detail-item">
-          <h4>Certificate ID</h4>
-          <p id="wipeID">XXXX-XXXX-XXXX</p>
-        </div>
-        <div class="detail-item">
-          <h4>Duration</h4>
-          <p id="wipeDuration">-- hours</p>
-        </div>
-        <div class="detail-item">
-          <h4>Category</h4>
-          <p id="wipeCategory">Category</p>
-        </div>
-      </div>
-      
-      <div class="wipe-skills">
-        <h4>Skills Acquired</h4>
-        <div class="wipe-skills-list" id="wipeSkills">
-          <!-- Skills will be populated here -->
-        </div>
-      </div>
-      
-      <div class="wipe-actions">
-        <button class="wipe-download-btn" id="wipeDownload">
-          <i class="fas fa-download"></i> Download Certificate
-        </button>
-        <button class="wipe-share-btn" id="wipeShare">
-          <i class="fas fa-share-alt"></i> Share
-        </button>
-      </div>
-    </div>
-  </div>
-
+  <!-- Theme Backgrounds -->
   <div class="theme-bg glass-bg">
     <div class="blob blob-1"></div>
     <div class="blob blob-2"></div>
@@ -426,7 +328,6 @@
 
   <div class="theme-bg cyberpunk-bg">
     <div class="cyber-grid"></div>
-    <div class="cyber-lines"></div>
   </div>
 
   <div class="theme-bg retro-bg">
@@ -449,6 +350,28 @@
 
   <div class="cursor-dot" data-cursor-dot></div>
   <div class="cursor-outline" data-cursor-outline></div>
+
+  <!-- Mobile Navigation Toggle -->
+  <button id="mobile-nav-toggle" class="mobile-nav-toggle" aria-label="Toggle Mobile Navigation">
+    <i class="fas fa-bars"></i>
+  </button>
+
+  <!-- Mobile Navigation Menu -->
+  <div id="mobile-nav-menu" class="mobile-nav-menu">
+    <button class="mobile-nav-close">&times;</button>
+    <nav class="mobile-nav-links">
+      <a href="#certificates" class="mobile-nav-link">certificates/></a>
+      <a href="#skills" class="mobile-nav-link">skills/></a>
+      <a href="#about" class="mobile-nav-link">about me/></a>
+      <a href="#contact" class="mobile-nav-link">contact/></a>
+      <div class="mobile-nav-social">
+        <a href="https://x.com/madhan_tirri" target="_blank" class="social-icon" title="Twitter"><i class="fa-brands fa-twitter"></i></a>
+        <a href="https://www.linkedin.com/in/madhan-tirri-6b8b31323" target="_blank" class="social-icon" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+        <a href="https://github.com/madhantirri" target="_blank" class="social-icon" title="GitHub"><i class="fa-brands fa-github"></i></a>
+        <a href="https://www.instagram.com/madhan_tirri" target="_blank" class="social-icon" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+      </div>
+    </nav>
+  </div>
 
   <script src="script.js"></script>
 </body>
