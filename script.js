@@ -1,874 +1,779 @@
 document.addEventListener('DOMContentLoaded', function() {
+// Update certificateData to include filter categories
+const certificateData = {
+  'blix.png': {
+    title: 'Blixathon IIT Bombay',
+    badge: 'Hackathon',
+    badgeClass: 'hackathon-badge',
+    category: 'hackathon', // ADD THIS
+    description: 'Participated in the national-level hackathon organized by IIT Bombay...',
+    date: 'October 2024',
+    issuer: 'IIT Bombay & Blix Tech',
+    duration: '48 Hours',
+    skills: ['Team Collaboration', 'Problem Solving', 'Prototyping', 'UI/UX Design', 'Presentation'],
+    link: 'https://example.com/blixathon-certificate'
+  },
+  'bridge.png': {
+    title: 'Bridge Building Competition',
+    badge: 'Competition',
+    badgeClass: 'competition-badge',
+    category: 'competition', // ADD THIS
+    description: 'Won first place in the national bridge building competition...',
+    date: 'March 2024',
+    issuer: 'National Engineering Association',
+    duration: '6 Months',
+    skills: ['Structural Engineering', 'CAD Design', 'Material Science', 'Project Management', 'Team Leadership'],
+    link: 'https://example.com/bridge-competition'
+  },
+  'neuracode-certificate.jpg': {
+    title: 'Neuracode AI Hackathon',
+    badge: 'Hackathon',
+    badgeClass: 'hackathon-badge',
+    category: 'hackathon', // ADD THIS
+    description: 'Developed an AI-powered solution for neurological disorder detection...',
+    date: 'February 2024',
+    issuer: 'Neuracode AI Foundation',
+    duration: '72 Hours',
+    skills: ['Machine Learning', 'Python', 'TensorFlow', 'Data Analysis', 'Neural Networks'],
+    link: 'https://example.com/neuracode-certificate'
+  },
+  'certificate4.jpg': {
+    title: 'Advanced Web Development',
+    badge: 'Course',
+    badgeClass: 'course-badge',
+    category: 'course', // ADD THIS
+    description: 'Completed comprehensive course covering full-stack web development...',
+    date: 'January 2024',
+    issuer: 'Coursera & University of Michigan',
+    duration: '3 Months',
+    skills: ['React.js', 'Node.js', 'MongoDB', 'REST APIs', 'Git', 'Deployment'],
+    link: 'https://example.com/web-dev-certificate'
+  },
+  'certificate5.jpg': {
+    title: 'Machine Learning Specialization',
+    badge: 'Course',
+    badgeClass: 'course-badge',
+    category: 'course', // ADD THIS
+    description: 'Completed specialization covering fundamental and advanced machine learning...',
+    date: 'December 2023',
+    issuer: 'Stanford University via Coursera',
+    duration: '4 Months',
+    skills: ['Python', 'Scikit-learn', 'TensorFlow', 'Deep Learning', 'Data Preprocessing', 'Model Evaluation'],
+    link: 'https://example.com/ml-certificate'
+  }
+};
 
-  // === SIMPLE TYPING WELCOME ANIMATION ===
-  const welcomeAnimation = document.getElementById('welcome-animation');
-  const typedText = document.getElementById('typed-text');
+// === SUPER FAST CURSOR LOGIC ===
+const cursorDot = document.querySelector('[data-cursor-dot]');
+const cursorOutline = document.querySelector('[data-cursor-outline]');
+
+if (cursorDot && cursorOutline) {
+  // Check if device supports hover (not mobile)
+  const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
   
-  function showWelcomeAnimation() {
-    if (!welcomeAnimation || !typedText) return;
+  if (!isTouchDevice) {
+    // Only show custom cursor on non-touch devices
+    let mouseX = 0;
+    let mouseY = 0;
+    let cursorX = 0;
+    let cursorY = 0;
     
-    const message = "Welcome to my Portfolio";
-    let index = 0;
-    const typingSpeed = 100; // Speed per character
-    const totalTime = 2500; // Total display: 2.5 seconds
+    // Very fast cursor follow speed
+    const speed = 0.25; // Increased for ultra-fast response
     
-    // Calculate typing duration
-    const typingDuration = message.length * typingSpeed;
-    const displayAfterTyping = totalTime - typingDuration;
+    function animateCursor() {
+      // Smooth interpolation for fast movement
+      const dx = mouseX - cursorX;
+      const dy = mouseY - cursorY;
+      
+      cursorX += dx * speed;
+      cursorY += dy * speed;
+      
+      cursorDot.style.left = `${cursorX}px`;
+      cursorDot.style.top = `${cursorY}px`;
+      
+      cursorOutline.style.left = `${cursorX}px`;
+      cursorOutline.style.top = `${cursorY}px`;
+      
+      requestAnimationFrame(animateCursor);
+    }
     
-    function typeCharacter() {
-      if (index < message.length) {
-        typedText.textContent += message.charAt(index);
-        index++;
-        setTimeout(typeCharacter, typingSpeed);
-      } else {
-        // After typing completes, wait and fade out
+    window.addEventListener('mousemove', function(e) {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    });
+    
+    // Start animation
+    animateCursor();
+    
+    // Hide cursor on mobile
+    document.body.style.cursor = 'none';
+  } else {
+    // Hide custom cursor on mobile
+    cursorDot.style.display = 'none';
+    cursorOutline.style.display = 'none';
+    document.body.style.cursor = 'auto';
+  }
+}
+
+// === MOBILE NAVIGATION ===
+const mobileNavToggle = document.getElementById('mobile-nav-toggle');
+const mobileNavMenu = document.getElementById('mobile-nav-menu');
+const mobileNavClose = document.querySelector('.mobile-nav-close');
+const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+if (mobileNavToggle && mobileNavMenu) {
+  mobileNavToggle.addEventListener('click', () => {
+    mobileNavMenu.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  });
+  
+  mobileNavClose.addEventListener('click', () => {
+    mobileNavMenu.classList.remove('active');
+    document.body.style.overflow = 'auto';
+  });
+  
+  mobileNavLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      mobileNavMenu.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    });
+  });
+  
+  // Close menu when clicking outside
+  mobileNavMenu.addEventListener('click', (e) => {
+    if (e.target === mobileNavMenu) {
+      mobileNavMenu.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    }
+  });
+}
+
+// === SIMPLE TYPING WELCOME ANIMATION ===
+const welcomeAnimation = document.getElementById('welcome-animation');
+const typedText = document.getElementById('typed-text');
+
+function showWelcomeAnimation() {
+  if (!welcomeAnimation || !typedText) return;
+  
+  const message = "Welcome to my Portfolio";
+  let index = 0;
+  const typingSpeed = 100;
+  const totalTime = 2500;
+  
+  const typingDuration = message.length * typingSpeed;
+  const displayAfterTyping = Math.max(totalTime - typingDuration, 300);
+  
+  function typeCharacter() {
+    if (index < message.length) {
+      typedText.textContent += message.charAt(index);
+      index++;
+      setTimeout(typeCharacter, typingSpeed);
+    } else {
+      setTimeout(() => {
+        welcomeAnimation.style.opacity = '0';
+        welcomeAnimation.style.transition = 'opacity 0.5s ease';
+        
         setTimeout(() => {
-          welcomeAnimation.style.opacity = '0';
-          welcomeAnimation.style.transition = 'opacity 0.5s ease';
-          
-          // Remove from DOM after fade out
-          setTimeout(() => {
-            if (welcomeAnimation.parentNode) {
-              welcomeAnimation.parentNode.removeChild(welcomeAnimation);
-            }
-          }, 500);
-        }, Math.max(displayAfterTyping, 300)); // Minimum 300ms display
-      }
+          if (welcomeAnimation.parentNode) {
+            welcomeAnimation.parentNode.removeChild(welcomeAnimation);
+          }
+        }, 500);
+      }, displayAfterTyping);
     }
-    
-    // Start typing immediately
-    typeCharacter();
   }
   
-  // Show animation on every page load/refresh
-  showWelcomeAnimation();
+  typeCharacter();
+}
 
+showWelcomeAnimation();
 
-  // === REST OF YOUR EXISTING CODE ===
-  
-  // --- VARIABLES ---
-  const body = document.body;
-  const settingsTrigger = document.getElementById('settings-trigger');
-  const settingsMenu = document.getElementById('settings-dropdown');
-  const themeToggle = document.getElementById('theme-toggle');
-  const modeBtn = document.getElementById('mode-cycle-btn');
-  const cursorBtn = document.getElementById('cursor-toggle-btn');
-  const cursorDot = document.querySelector('[data-cursor-dot]');
-  const cursorOutline = document.querySelector('[data-cursor-outline]');
-  
-  // --- 1. SETTINGS MENU TOGGLE ---
-  if (settingsTrigger && settingsMenu) {
-    settingsTrigger.addEventListener('click', (e) => {
-      e.stopPropagation();
-      settingsMenu.classList.toggle('menu-open');
+// === REST OF YOUR EXISTING CODE ===
+
+// --- VARIABLES ---
+const body = document.body;
+const settingsTrigger = document.getElementById('settings-trigger');
+const settingsMenu = document.getElementById('settings-dropdown');
+const themeToggle = document.getElementById('theme-toggle');
+const modeBtn = document.getElementById('mode-cycle-btn');
+
+// --- 1. SETTINGS MENU TOGGLE ---
+if (settingsTrigger && settingsMenu) {
+  settingsTrigger.addEventListener('click', (e) => {
+    e.stopPropagation();
+    settingsMenu.classList.toggle('menu-open');
+    const icon = settingsTrigger.querySelector('i');
+    if (settingsMenu.classList.contains('menu-open')) {
+      icon.classList.replace('fa-ellipsis-vertical', 'fa-xmark');
+    } else {
+      icon.classList.replace('fa-xmark', 'fa-ellipsis-vertical');
+    }
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!settingsMenu.contains(e.target) && !settingsTrigger.contains(e.target)) {
+      settingsMenu.classList.remove('menu-open');
       const icon = settingsTrigger.querySelector('i');
-      if (settingsMenu.classList.contains('menu-open')) {
-        icon.classList.replace('fa-ellipsis-vertical', 'fa-xmark');
-      } else {
-        icon.classList.replace('fa-xmark', 'fa-ellipsis-vertical');
-      }
-    });
-
-    document.addEventListener('click', (e) => {
-      if (!settingsMenu.contains(e.target) && !settingsTrigger.contains(e.target)) {
-        settingsMenu.classList.remove('menu-open');
-        const icon = settingsTrigger.querySelector('i');
-        icon.classList.replace('fa-xmark', 'fa-ellipsis-vertical');
-      }
-    });
-  }
-
-  // --- 2. THEME CURSOR TOGGLE BUTTON (Top Right) ---
-  if (cursorBtn) {
-    // Check if theme cursor was previously enabled
-    const themeCursorEnabled = localStorage.getItem('themeCursor') === 'enabled';
-    
-    // Initialize theme cursor
-    if (themeCursorEnabled) {
-      enableThemeCursor();
-    } else {
-      disableThemeCursor();
-    }
-
-    // Toggle theme cursor on button click
-    cursorBtn.addEventListener('click', () => {
-      if (body.classList.contains('theme-cursor-active')) {
-        disableThemeCursor();
-      } else {
-        enableThemeCursor();
-      }
-    });
-
-    function enableThemeCursor() {
-      body.classList.add('theme-cursor-active');
-      cursorBtn.classList.add('active');
-      localStorage.setItem('themeCursor', 'enabled');
-      updateCursorBasedOnTheme();
-    }
-
-    function disableThemeCursor() {
-      body.classList.remove('theme-cursor-active');
-      cursorBtn.classList.remove('active');
-      localStorage.setItem('themeCursor', 'disabled');
-      // Remove all cursor type classes
-      body.classList.remove('cursor-normal', 'cursor-crosshair', 'cursor-pointer', 'cursor-text', 
-                           'cursor-wait', 'cursor-help', 'cursor-not-allowed', 'cursor-move', 
-                           'cursor-zoom-in', 'cursor-custom');
-    }
-  }
-
-  // --- 3. ANIMATE STATS COUNTER ---
-  const statNumbers = document.querySelectorAll('.stat-number[data-count]');
-  
-  function animateStats() {
-    statNumbers.forEach(stat => {
-      const target = parseInt(stat.getAttribute('data-count'));
-      const duration = 2000; // 2 seconds
-      const step = target / (duration / 16); // 60fps
-      let current = 0;
-      
-      const updateCount = () => {
-        current += step;
-        if (current < target) {
-          stat.textContent = Math.floor(current);
-          requestAnimationFrame(updateCount);
-        } else {
-          stat.textContent = target;
-        }
-      };
-      
-      updateCount();
-    });
-  }
-
-  // --- 4. CURSOR ANIMATION (For Theme Cursor) ---
-  let mouseX = 0, mouseY = 0;
-  let cursorX = 0, cursorY = 0;
-
-  window.addEventListener('mousemove', function(e) {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-    if (cursorDot && body.classList.contains('theme-cursor-active')) {
-      cursorDot.style.left = `${mouseX}px`;
-      cursorDot.style.top = `${mouseY}px`;
+      icon.classList.replace('fa-xmark', 'fa-ellipsis-vertical');
     }
   });
+}
 
-  function animateCursor() {
-    if (body.classList.contains('theme-cursor-active')) {
-      let distX = mouseX - cursorX;
-      let distY = mouseY - cursorY;
-      cursorX += distX * 0.15; // smooth lag
-      cursorY += distY * 0.15;
-      
-      if (cursorOutline) {
-        cursorOutline.style.left = `${cursorX}px`;
-        cursorOutline.style.top = `${cursorY}px`;
-      }
-    }
-    requestAnimationFrame(animateCursor);
-  }
-  animateCursor();
-
-  // Hover effects for Theme Cursor
-  const interactiveElements = document.querySelectorAll('a, button, .carousel-control, .skill-nav-btn, input');
-  interactiveElements.forEach(el => {
-    el.addEventListener('mouseenter', () => {
-      if (body.classList.contains('theme-cursor-active')) {
-        body.classList.add('hovering');
-      }
-    });
-    el.addEventListener('mouseleave', () => {
-      if (body.classList.contains('theme-cursor-active')) {
-        body.classList.remove('hovering');
-      }
-    });
-  });
-
-  // --- 5. LIGHT / DARK THEME TOGGLE ---
-  function updateThemeText() {
-    if (themeToggle) {
-      themeToggle.textContent = body.classList.contains('light-theme') ? 'Dark Mode' : 'Light Mode';
-    }
-  }
-  
-  function setTheme(theme) {
-    if (theme === 'light') {
-      body.classList.add('light-theme'); 
-      body.classList.remove('dark-theme');
-    } else {
-      body.classList.add('dark-theme'); 
-      body.classList.remove('light-theme');
-    }
-    localStorage.setItem('theme', theme);
-    updateThemeText();
-    updateCursorBasedOnTheme();
-  }
-  
+// --- 2. LIGHT / DARK THEME TOGGLE ---
+function updateThemeText() {
   if (themeToggle) {
-    themeToggle.addEventListener('click', () => {
-      if (body.classList.contains('dark-theme')) {
-        setTheme('light');
+    themeToggle.textContent = body.classList.contains('light-theme') ? 'Dark Mode' : 'Light Mode';
+  }
+}
+
+function setTheme(theme) {
+  if (theme === 'light') {
+    body.classList.add('light-theme'); 
+    body.classList.remove('dark-theme');
+  } else {
+    body.classList.add('dark-theme'); 
+    body.classList.remove('light-theme');
+  }
+  localStorage.setItem('theme', theme);
+  updateThemeText();
+}
+
+if (themeToggle) {
+  themeToggle.addEventListener('click', () => {
+    if (body.classList.contains('dark-theme')) {
+      setTheme('light');
+    } else {
+      setTheme('dark');
+    }
+  });
+  const savedTheme = localStorage.getItem('theme') || 'dark';
+  setTheme(savedTheme);
+}
+
+// === ULTRA-FAST 3D FLIP EFFECT FOR CERTIFICATES ===
+const certItems = document.querySelectorAll('.cert-item');
+
+certItems.forEach(item => {
+  const card = item.querySelector('.cert-card-3d');
+  
+  if (card) {
+    // Check if device is mobile
+    const isMobile = window.innerWidth <= 768;
+    
+    if (!isMobile) {
+      // Desktop: Fast tilt effect
+      item.addEventListener('mousemove', (e) => {
+        if (!card.classList.contains('flipped')) {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          
+          // Fast, subtle tilt
+          const xRotate = -((y - rect.height / 2) / rect.height) * 8;
+          const yRotate = ((x - rect.width / 2) / rect.width) * 8;
+          
+          card.style.transform = `
+            perspective(1000px) 
+            rotateX(${xRotate}deg) 
+            rotateY(${yRotate}deg) 
+            scale3d(1.03, 1.03, 1.03)
+          `;
+          card.style.transition = 'transform 0.15s ease-out';
+        }
+      });
+
+      item.addEventListener('mouseleave', () => {
+        if (!card.classList.contains('flipped')) {
+          card.style.transform = `
+            perspective(1000px) 
+            rotateX(0deg) 
+            rotateY(0deg) 
+            scale3d(1, 1, 1)
+          `;
+          card.style.transition = 'transform 0.2s ease-out';
+        }
+      });
+    }
+    
+    // Both desktop and mobile: Flip on click/tap
+    item.addEventListener('click', function(e) {
+      // Don't flip if clicking inside modal trigger
+      if (e.target.closest('.cert-modal-trigger')) return;
+      
+      if (!card.classList.contains('flipped')) {
+        card.classList.add('flipped');
+        card.style.transform = 'perspective(1000px) rotateY(180deg)';
+        card.style.transition = 'transform 0.6s cubic-bezier(0.23, 1, 0.32, 1)';
+        
+        // Auto-flip back after 3 seconds
+        setTimeout(() => {
+          if (card.classList.contains('flipped')) {
+            card.classList.remove('flipped');
+            card.style.transform = 'perspective(1000px) rotateY(0deg)';
+            card.style.transition = 'transform 0.6s cubic-bezier(0.23, 1, 0.32, 1)';
+          }
+        }, 3000);
       } else {
-        setTheme('dark');
+        // If already flipped, open modal
+        const index = Array.from(certItems).indexOf(item);
+        const certFilenames = ['blix.png', 'bridge.png', 'neuracode-certificate.jpg', 'certificate4.jpg', 'certificate5.jpg'];
+        if (index < certFilenames.length) {
+          const filename = certFilenames[index];
+          openCertificateModal(filename);
+        }
       }
     });
-    const savedTheme = localStorage.getItem('theme') || 'dark';
-    setTheme(savedTheme);
-  }
-
-  // --- 6. UI MODE CYCLE (5 Modes) ---
-  const modes = ['normal', 'theme-glass', 'theme-cyberpunk', 'theme-retro', 'theme-origami'];
-  const labels = ['🎨 Normal UI', '🔮 Glass UI', '⚡ Cyberpunk', '📟 Terminal', '✈️ Origami'];
-  let currentModeIndex = parseInt(localStorage.getItem('modeIndex')) || 0;
-
-  function applyMode(index) {
-    // Remove all theme classes
-    body.classList.remove('theme-glass', 'theme-cyberpunk', 'theme-retro', 'theme-origami');
     
-    const modeClass = modes[index];
-    if (modeClass !== 'normal') {
-      body.classList.add(modeClass);
+    // Touch feedback for mobile
+    if (isMobile) {
+      item.addEventListener('touchstart', () => {
+        card.style.transform = 'scale(0.98)';
+        card.style.transition = 'transform 0.1s ease';
+      });
+      
+      item.addEventListener('touchend', () => {
+        card.style.transform = 'scale(1)';
+        card.style.transition = 'transform 0.2s ease';
+      });
     }
-    
-    if (modeBtn) {
-      modeBtn.textContent = labels[index];
-    }
-    
-    localStorage.setItem('modeIndex', index);
-    currentModeIndex = index;
-    updateCursorBasedOnTheme();
   }
+});
+
+// === ENHANCED GLOW EFFECT FOR CERTIFICATES ===
+const allCertItems = document.querySelectorAll('.cert-item');
+
+allCertItems.forEach(item => {
+  const glow = item.querySelector('.cert-glow');
+  const card = item.querySelector('.cert-card-3d');
   
-  // Init Mode
-  applyMode(currentModeIndex);
+  if (glow && card) {
+    item.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width) * 100;
+      const y = ((e.clientY - rect.top) / rect.height) * 100;
+      
+      glow.style.setProperty('--mouse-x', `${x}%`);
+      glow.style.setProperty('--mouse-y', `${y}%`);
+      glow.style.opacity = '1';
+      glow.style.transition = 'opacity 0.1s ease';
+    });
+    
+    item.addEventListener('mouseleave', () => {
+      glow.style.setProperty('--mouse-x', '50%');
+      glow.style.setProperty('--mouse-y', '50%');
+      glow.style.opacity = '0';
+      glow.style.transition = 'opacity 0.3s ease';
+    });
+  }
+});
+
+// === CERTIFICATE MODAL FUNCTIONALITY ===
+const certModal = document.getElementById('cert-modal');
+const modalCloseBtn = document.querySelector('.cert-modal-close');
+
+// Function to open modal with certificate details
+function openCertificateModal(certSrc) {
+  const certData = certificateData[certSrc];
+  
+  if (!certData) return;
+  
+  // Populate modal with data
+  document.getElementById('modal-cert-img').src = certSrc;
+  document.getElementById('modal-cert-title').textContent = certData.title;
+  document.getElementById('modal-cert-description').textContent = certData.description;
+  document.getElementById('modal-cert-date').textContent = certData.date;
+  document.getElementById('modal-cert-issuer').textContent = certData.issuer;
+  document.getElementById('modal-cert-duration').textContent = certData.duration;
+  document.getElementById('modal-cert-link').href = certData.link;
+  
+  // Set badge
+  const modalBadge = document.getElementById('modal-cert-badge');
+  modalBadge.textContent = certData.badge;
+  modalBadge.className = `cert-modal-badge ${certData.badgeClass}`;
+  
+  // Populate skills
+  const skillsContainer = document.getElementById('modal-cert-skills');
+  skillsContainer.innerHTML = '';
+  certData.skills.forEach(skill => {
+    const skillTag = document.createElement('span');
+    skillTag.className = 'skill-tag';
+    skillTag.textContent = skill;
+    skillsContainer.appendChild(skillTag);
+  });
+  
+  // Show modal
+  certModal.classList.add('active');
+  document.body.style.overflow = 'hidden'; // Prevent scrolling
+}
+
+// Function to close modal
+function closeCertificateModal() {
+  certModal.classList.remove('active');
+  document.body.style.overflow = 'auto'; // Re-enable scrolling
+}
+
+// Make ENTIRE certificate items clickable for modal
+certItems.forEach((item, index) => {
+  // Add visual feedback on hover
+  const card = item.querySelector('.cert-card-3d');
+  if (card) {
+    // Add click for modal (double-click or after delay)
+    let clickTimer;
+    let isDoubleClick = false;
+    
+    item.addEventListener('click', (e) => {
+      clearTimeout(clickTimer);
+      
+      if (isDoubleClick) {
+        isDoubleClick = false;
+        // Double click opens modal immediately
+        const certFilenames = ['blix.png', 'bridge.png', 'neuracode-certificate.jpg', 'certificate4.jpg', 'certificate5.jpg'];
+        if (index < certFilenames.length) {
+          const filename = certFilenames[index];
+          openCertificateModal(filename);
+        }
+        return;
+      }
+      
+      // Single click for flip
+      isDoubleClick = true;
+      clickTimer = setTimeout(() => {
+        isDoubleClick = false;
+      }, 300);
+    });
+    
+    // Long press for mobile modal
+    let pressTimer;
+    item.addEventListener('touchstart', (e) => {
+      pressTimer = setTimeout(() => {
+        // Long press opens modal on mobile
+        const certFilenames = ['blix.png', 'bridge.png', 'neuracode-certificate.jpg', 'certificate4.jpg', 'certificate5.jpg'];
+        if (index < certFilenames.length) {
+          const filename = certFilenames[index];
+          openCertificateModal(filename);
+        }
+      }, 500);
+    });
+    
+    item.addEventListener('touchend', () => {
+      clearTimeout(pressTimer);
+    });
+    
+    item.addEventListener('touchmove', () => {
+      clearTimeout(pressTimer);
+    });
+  }
+});
+
+// Close modal events
+modalCloseBtn.addEventListener('click', closeCertificateModal);
+
+// Close modal when clicking outside content
+certModal.addEventListener('click', (e) => {
+  if (e.target === certModal) {
+    closeCertificateModal();
+  }
+});
+
+// Close modal with Escape key
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && certModal.classList.contains('active')) {
+    closeCertificateModal();
+  }
+});
+
+// --- 3. UI MODE CYCLE (5 Modes) ---
+const modes = ['normal', 'theme-glass', 'theme-cyberpunk', 'theme-retro', 'theme-origami'];
+const labels = ['🎨 Normal UI', '🔮 Glass UI', '⚡ Cyberpunk', '📟 Terminal', '✈️ Origami'];
+let currentModeIndex = parseInt(localStorage.getItem('modeIndex')) || 0;
+
+function applyMode(index) {
+  body.classList.remove('theme-glass', 'theme-cyberpunk', 'theme-retro', 'theme-origami');
+  
+  const modeClass = modes[index];
+  if (modeClass !== 'normal') {
+    body.classList.add(modeClass);
+  }
   
   if (modeBtn) {
-    modeBtn.addEventListener('click', () => {
-      let nextIndex = (currentModeIndex + 1) % modes.length;
-      applyMode(nextIndex);
-    });
+    modeBtn.textContent = labels[index];
   }
+  
+  localStorage.setItem('modeIndex', index);
+  currentModeIndex = index;
+}
 
-  // --- 7. UPDATE CURSOR BASED ON CURRENT THEME ---
-  function updateCursorBasedOnTheme() {
-    if (!body.classList.contains('theme-cursor-active')) return;
-    
-    // Remove all cursor type classes
-    body.classList.remove('cursor-normal', 'cursor-crosshair', 'cursor-pointer', 'cursor-text', 
-                         'cursor-wait', 'cursor-help', 'cursor-not-allowed', 'cursor-move', 
-                         'cursor-zoom-in', 'cursor-custom');
-    
-    // Apply cursor based on current theme
-    if (body.classList.contains('theme-glass')) {
-      body.classList.add('cursor-crosshair');
-    } else if (body.classList.contains('theme-cyberpunk')) {
-      body.classList.add('cursor-custom');
-    } else if (body.classList.contains('theme-retro')) {
-      body.classList.add('cursor-text');
-    } else if (body.classList.contains('theme-origami')) {
-      body.classList.add('cursor-pointer');
-    } else {
-      // Default/Normal theme - use custom dot cursor
-      body.classList.add('cursor-custom');
-    }
-  }
+applyMode(currentModeIndex);
 
-  // --- 8. CURSOR TYPE CYCLE (Inside 3 dots settings - NORMAL CURSORS ONLY) ---
-  const normalCursorTypes = [
-    { name: 'normal', icon: '🐭', label: 'Normal Cursor' },
-    { name: 'crosshair', icon: '➕', label: 'Crosshair' },
-    { name: 'pointer', icon: '👆', label: 'Pointer' },
-    { name: 'text', icon: '📝', label: 'Text' },
-    { name: 'wait', icon: '⏳', label: 'Wait' },
-    { name: 'help', icon: '❓', label: 'Help' },
-    { name: 'not-allowed', icon: '🚫', label: 'Not Allowed' },
-    { name: 'move', icon: '↔️', label: 'Move' },
-    { name: 'zoom-in', icon: '🔍', label: 'Zoom In' }
-  ];
-
-  const cursorCycleBtn = document.getElementById('cursor-cycle-btn');
-  let currentNormalCursorIndex = parseInt(localStorage.getItem('normalCursorIndex')) || 0;
-
-  function applyNormalCursor(index) {
-    // Only apply if theme cursor is NOT active
-    if (body.classList.contains('theme-cursor-active')) {
-      // If theme cursor is active, disable it first
-      disableThemeCursor();
-      if (cursorBtn) cursorBtn.classList.remove('active');
-    }
-    
-    // Remove all cursor classes
-    normalCursorTypes.forEach(type => {
-      body.classList.remove(`cursor-${type.name}`);
-    });
-    
-    // Apply current cursor class
-    const cursorType = normalCursorTypes[index];
-    if (cursorType.name !== 'normal') {
-      body.classList.add(`cursor-${cursorType.name}`);
-    }
-    
-    // Update button text
-    if (cursorCycleBtn) {
-      cursorCycleBtn.innerHTML = `${cursorType.icon} ${cursorType.label}`;
-    }
-    
-    // Save to localStorage
-    localStorage.setItem('normalCursorIndex', index);
-    currentNormalCursorIndex = index;
-  }
-
-  // Initialize normal cursor type
-  if (!body.classList.contains('theme-cursor-active')) {
-    applyNormalCursor(currentNormalCursorIndex);
-  } else {
-    // If theme cursor is active, show appropriate label
-    if (cursorCycleBtn) {
-      cursorCycleBtn.innerHTML = '🎨 Theme Cursor Active';
-    }
-  }
-
-  // Add click event to cycle through normal cursors
-  if (cursorCycleBtn) {
-    cursorCycleBtn.addEventListener('click', () => {
-      if (body.classList.contains('theme-cursor-active')) {
-        // If theme cursor is active, disable it and switch to normal cursor
-        disableThemeCursor();
-        applyNormalCursor(0); // Start with normal cursor
-      } else {
-        // Cycle through normal cursors
-        let nextIndex = (currentNormalCursorIndex + 1) % normalCursorTypes.length;
-        applyNormalCursor(nextIndex);
-      }
-    });
-  }
-
-  // --- 9. CERTIFICATE GALLERY WITH FILTERING & CENTER WIPE ---
-  const certificateWipe = document.getElementById('certificateWipe');
-  const wipeClose = document.getElementById('wipeClose');
-  const wipeImg = document.getElementById('wipeImg');
-  const wipeTitle = document.getElementById('wipeTitle');
-  const wipeOrg = document.getElementById('wipeOrg');
-  const wipeDesc = document.getElementById('wipeDesc');
-  const wipeDate = document.getElementById('wipeDate');
-  const wipeID = document.getElementById('wipeID');
-  const wipeDuration = document.getElementById('wipeDuration');
-  const wipeCategory = document.getElementById('wipeCategory');
-  const wipeSkills = document.getElementById('wipeSkills');
-  const wipeDownload = document.getElementById('wipeDownload');
-  const wipeShare = document.getElementById('wipeShare');
-  const filterBtns = document.querySelectorAll('.filter-btn');
-  const certificateCards = document.querySelectorAll('.certificate-card');
-  const viewFullBtns = document.querySelectorAll('.view-full-btn');
-  const viewAllCertificatesBtn = document.getElementById('view-all-certificates');
-
-  // Enhanced Certificate Data
-  const certificateData = {
-    'blix': {
-      title: 'Blixathon IIT Bombay',
-      org: 'IIT Bombay TechFest',
-      desc: 'Participated in the 24-hour hackathon at IIT Bombay, developing an innovative solution for urban transportation challenges using IoT and machine learning. This certificate recognizes active participation and contribution to the development of smart city solutions.',
-      image: 'blix.png',
-      date: 'December 2023',
-      id: 'BLX-HCK-2023-001',
-      duration: '24 hours',
-      category: 'Hackathon',
-      skills: ['IoT Development', 'Machine Learning', 'Problem Solving', 'Team Collaboration', 'Smart Cities'],
-      downloadUrl: 'blix.png'
-    },
-    'bridge': {
-      title: 'Bridge Building Competition',
-      org: 'IITRAM Engineering Week',
-      desc: 'Awarded for designing and constructing a model bridge that could withstand maximum load with minimal material usage. This competition tested structural engineering principles, material science understanding, and innovative design thinking.',
-      image: 'bridge.png',
-      date: 'November 2023',
-      id: 'BRG-CMP-2023-002',
-      duration: '2 weeks',
-      category: 'Competition',
-      skills: ['Structural Design', 'Material Science', 'CAD Modeling', 'Innovation', 'Engineering Principles'],
-      downloadUrl: 'bridge.png'
-    },
-    'neuracode': {
-      title: 'Neuracode AI Hackathon',
-      org: 'Neuracode Technologies',
-      desc: 'Certificate of participation in the 24-hour Neuracode hackathon for developing a prototype of an AI-based mental health assistant using Natural Language Processing (NLP) and machine learning algorithms.',
-      image: 'neuracode-certificate.jpg',
-      date: 'October 2023',
-      id: 'NRC-AI-2023-003',
-      duration: '24 hours',
-      category: 'Hackathon',
-      skills: ['Artificial Intelligence', 'Natural Language Processing', 'Machine Learning', 'Mental Health Tech', 'Prototyping'],
-      downloadUrl: 'neuracode-certificate.jpg'
-    },
-    'webdev': {
-      title: 'Advanced Web Development',
-      org: 'Coursera Certification',
-      desc: 'Completed comprehensive course on modern web development covering HTML5, CSS3, JavaScript ES6+, React, Node.js, and database integration. Demonstrated proficiency in building responsive web applications.',
-      image: 'certificate4.jpg',
-      date: 'August 2023',
-      id: 'WEB-DEV-2023-004',
-      duration: '120 hours',
-      category: 'Course',
-      skills: ['HTML5/CSS3', 'JavaScript ES6+', 'React.js', 'Node.js', 'Database Integration', 'Responsive Design'],
-      downloadUrl: 'certificate4.jpg'
-    },
-    'ml': {
-      title: 'Machine Learning Fundamentals',
-      org: 'Stanford Online',
-      desc: 'Successfully completed course covering core machine learning concepts including supervised learning, unsupervised learning, neural networks, and practical implementation using Python and scikit-learn.',
-      image: 'certificate5.jpg',
-      date: 'June 2023',
-      id: 'ML-FND-2023-005',
-      duration: '80 hours',
-      category: 'Course',
-      skills: ['Python Programming', 'Supervised Learning', 'Unsupervised Learning', 'Neural Networks', 'scikit-learn', 'Data Analysis'],
-      downloadUrl: 'certificate5.jpg'
-    }
-  };
-
-  // Filter certificates
-  if (filterBtns.length > 0) {
-    filterBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        // Remove active class from all buttons
-        filterBtns.forEach(b => b.classList.remove('active'));
-        // Add active class to clicked button
-        btn.classList.add('active');
-        
-        const filter = btn.dataset.filter;
-        
-        // Filter certificates
-        certificateCards.forEach(card => {
-          if (filter === 'all' || card.dataset.category === filter) {
-            card.style.display = 'flex';
-            // Reset animation state
-            card.classList.remove('animate-in');
-            const index = Array.from(certificateCards).indexOf(card);
-            if (index % 2 === 0) {
-              card.style.transform = 'translateX(-150px) translateY(20px) rotate(-2deg)';
-            } else {
-              card.style.transform = 'translateX(150px) translateY(20px) rotate(2deg)';
-            }
-            card.style.opacity = '0';
-            
-            // Re-animate after filter
-            setTimeout(() => {
-              const visibleCards = Array.from(document.querySelectorAll('.certificate-card')).filter(c => 
-                c.style.display !== 'none' && c.style.display !== ''
-              );
-              const cardIndex = visibleCards.indexOf(card);
-              if (cardIndex > -1) {
-                setTimeout(() => {
-                  card.classList.add('animate-in');
-                  card.style.opacity = '1';
-                  card.style.transform = 'translateX(0) translateY(0) rotate(0deg)';
-                }, cardIndex * 300);
-              }
-            }, 50);
-          } else {
-            card.style.display = 'none';
-            card.classList.remove('animate-in');
-          }
-        });
-      });
-    });
-  }
-
-  // Open certificate with center wipe
-  if (certificateCards.length > 0) {
-    certificateCards.forEach(card => {
-      card.addEventListener('click', () => {
-        const certId = card.querySelector('.view-full-btn').dataset.cert;
-        const certData = certificateData[certId];
-        
-        if (certData) {
-          wipeImg.src = certData.image;
-          wipeImg.alt = certData.title;
-          wipeTitle.textContent = certData.title;
-          wipeOrg.textContent = certData.org;
-          wipeDesc.textContent = certData.desc;
-          wipeDate.textContent = certData.date;
-          wipeID.textContent = certData.id;
-          wipeDuration.textContent = certData.duration;
-          wipeCategory.textContent = certData.category;
-          
-          // Update skills list
-          wipeSkills.innerHTML = '';
-          certData.skills.forEach(skill => {
-            const skillTag = document.createElement('span');
-            skillTag.className = 'skill-tag';
-            skillTag.textContent = skill;
-            wipeSkills.appendChild(skillTag);
-          });
-          
-          // Update download button
-          if (wipeDownload) {
-            wipeDownload.onclick = () => {
-              const link = document.createElement('a');
-              link.href = certData.downloadUrl;
-              link.download = `${certData.title.replace(/\s+/g, '_')}_certificate.jpg`;
-              document.body.appendChild(link);
-              link.click();
-              document.body.removeChild(link);
-            };
-          }
-          
-          // Update share button
-          if (wipeShare) {
-            wipeShare.onclick = () => {
-              if (navigator.share) {
-                navigator.share({
-                  title: certData.title,
-                  text: `Check out my certificate: ${certData.title} from ${certData.org}`,
-                  url: window.location.href
-                });
-              } else {
-                // Fallback for browsers that don't support Web Share API
-                navigator.clipboard.writeText(`${certData.title} - ${certData.org}\n${window.location.href}`);
-                alert('Certificate link copied to clipboard!');
-              }
-            };
-          }
-          
-          // Show wipe transition
-          certificateWipe.classList.add('active');
-          document.body.style.overflow = 'hidden';
-        }
-      });
-    });
-  }
-
-  // Also keep view full buttons working for compatibility
-  if (viewFullBtns.length > 0) {
-    viewFullBtns.forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        e.stopPropagation(); // Prevent card click from triggering
-        const card = btn.closest('.certificate-card');
-        card.click(); // Trigger the card click event
-      });
-    });
-  }
-
-  // View all certificates
-  if (viewAllCertificatesBtn) {
-    viewAllCertificatesBtn.addEventListener('click', () => {
-      filterBtns.forEach(b => b.classList.remove('active'));
-      filterBtns[0].classList.add('active'); // Select "All" filter
-      
-      certificateCards.forEach(card => {
-        card.style.display = 'flex';
-        card.classList.remove('animate-in');
-        const index = Array.from(certificateCards).indexOf(card);
-        if (index % 2 === 0) {
-          card.style.transform = 'translateX(-150px) translateY(20px) rotate(-2deg)';
-        } else {
-          card.style.transform = 'translateX(150px) translateY(20px) rotate(2deg)';
-        }
-        card.style.opacity = '0';
-      });
-      
-      // Animate all cards one by one
-      setTimeout(() => {
-        certificateCards.forEach((card, index) => {
-          setTimeout(() => {
-            card.classList.add('animate-in');
-            card.style.opacity = '1';
-            card.style.transform = 'translateX(0) translateY(0) rotate(0deg)';
-          }, index * 300);
-        });
-      }, 50);
-      
-      // Scroll to certificates section
-      certificatesSection.scrollIntoView({ behavior: 'smooth' });
-    });
-  }
-
-  // Close wipe functions
-  function closeWipe() {
-    certificateWipe.classList.remove('active');
-    document.body.style.overflow = 'auto';
-  }
-
-  if (wipeClose) {
-    wipeClose.addEventListener('click', closeWipe);
-  }
-
-  // Close wipe when clicking outside
-  if (certificateWipe) {
-    certificateWipe.addEventListener('click', (e) => {
-      if (e.target === certificateWipe) {
-        closeWipe();
-      }
-    });
-  }
-
-  // Close wipe with Escape key
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && certificateWipe.classList.contains('active')) {
-      closeWipe();
-    }
+if (modeBtn) {
+  modeBtn.addEventListener('click', () => {
+    let nextIndex = (currentModeIndex + 1) % modes.length;
+    applyMode(nextIndex);
   });
+}
 
-  // --- 10. SKILLS AUTO SCROLL ---
-  const skillsContainer = document.querySelector('.skills-container');
-  const skillsTrack = document.querySelector('.skills-track');
-  const prevSkillBtn = document.querySelector('.skill-nav-btn.prev-btn');
-  const nextSkillBtn = document.querySelector('.skill-nav-btn.next-btn');
+// --- 4. SKILLS AUTO SCROLL ---
+const skillsContainer = document.querySelector('.skills-container');
+const skillsTrack = document.querySelector('.skills-track');
+const prevSkillBtn = document.querySelector('.skill-nav-btn.prev-btn');
+const nextSkillBtn = document.querySelector('.skill-nav-btn.next-btn');
 
-  if (skillsContainer && skillsTrack) {
-    // Store original track width
-    const originalTrackContent = skillsTrack.innerHTML;
-    // Clone items for seamless loop
-    skillsTrack.innerHTML = originalTrackContent + originalTrackContent;
+if (skillsContainer && skillsTrack) {
+  const originalTrackContent = skillsTrack.innerHTML;
+  skillsTrack.innerHTML = originalTrackContent + originalTrackContent;
+  
+  let currentPosition = 0;
+  let autoScrollInterval;
+  const scrollSpeed = 1.5; // Increased scroll speed
+
+  function scrollNext() {
+    currentPosition += scrollSpeed;
+    const trackWidth = skillsTrack.scrollWidth / 2;
     
-    let currentPosition = 0;
-    let autoScrollInterval;
-    const scrollSpeed = 1;
+    if (currentPosition >= trackWidth) {
+      currentPosition = 0;
+    }
+    
+    skillsTrack.style.transform = `translateX(-${currentPosition}px)`;
+  }
+  
+  function startAutoScroll() {
+    clearInterval(autoScrollInterval);
+    autoScrollInterval = setInterval(scrollNext, 16); // ~60fps
+  }
+  
+  function stopAutoScroll() { 
+    clearInterval(autoScrollInterval); 
+  }
 
-    function scrollNext() {
-      currentPosition += scrollSpeed;
+  startAutoScroll();
+  skillsContainer.addEventListener('mouseenter', stopAutoScroll);
+  skillsContainer.addEventListener('mouseleave', startAutoScroll);
+  
+  if(nextSkillBtn) {
+    nextSkillBtn.addEventListener('click', () => { 
+      currentPosition += 300; // Increased jump
       const trackWidth = skillsTrack.scrollWidth / 2;
-      
-      // Reset to start when we've scrolled half the track width
       if (currentPosition >= trackWidth) {
         currentPosition = 0;
       }
-      
-      skillsTrack.style.transform = `translateX(-${currentPosition}px)`;
-    }
-    
-    function startAutoScroll() {
-      clearInterval(autoScrollInterval);
-      autoScrollInterval = setInterval(scrollNext, 20);
-    }
-    
-    function stopAutoScroll() { 
-      clearInterval(autoScrollInterval); 
-    }
+      skillsTrack.style.transform = `translateX(-${currentPosition}px)`; 
+    });
+  }
+  
+  if(prevSkillBtn) {
+    prevSkillBtn.addEventListener('click', () => { 
+      currentPosition -= 300; // Increased jump
+      if(currentPosition < 0) {
+        currentPosition = 0;
+      } 
+      skillsTrack.style.transform = `translateX(-${currentPosition}px)`; 
+    });
+  }
+}
 
-    startAutoScroll();
-    skillsContainer.addEventListener('mouseenter', stopAutoScroll);
-    skillsContainer.addEventListener('mouseleave', startAutoScroll);
+// --- 5. SMOOTH SCROLL FOR NAVIGATION LINKS ---
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
     
-    if(nextSkillBtn) {
-      nextSkillBtn.addEventListener('click', () => { 
-        currentPosition += 200; 
-        const trackWidth = skillsTrack.scrollWidth / 2;
-        if (currentPosition >= trackWidth) {
-          currentPosition = 0;
-        }
-        skillsTrack.style.transform = `translateX(-${currentPosition}px)`; 
+    const targetId = this.getAttribute('href');
+    if (targetId === '#') return;
+    
+    const targetElement = document.querySelector(targetId);
+    if (targetElement) {
+      window.scrollTo({
+        top: targetElement.offsetTop - 80,
+        behavior: 'smooth'
       });
     }
+  });
+});
+
+// === MOBILE-SPECIFIC OPTIMIZATIONS ===
+function optimizeForMobile() {
+  const isMobile = window.innerWidth <= 768;
+  
+  if (isMobile) {
+    // Disable custom cursor on mobile
+    if (cursorDot) cursorDot.style.display = 'none';
+    if (cursorOutline) cursorOutline.style.display = 'none';
+    document.body.style.cursor = 'auto';
     
-    if(prevSkillBtn) {
-      prevSkillBtn.addEventListener('click', () => { 
-        currentPosition -= 200; 
-        if(currentPosition < 0) {
-          currentPosition = 0;
-        } 
-        skillsTrack.style.transform = `translateX(-${currentPosition}px)`; 
-      });
+    // Hide desktop navigation on mobile
+    const topNav = document.querySelector('.top-nav');
+    if (topNav) {
+      topNav.style.display = 'none';
+    }
+    
+    // Show mobile nav toggle
+    const mobileToggle = document.getElementById('mobile-nav-toggle');
+    if (mobileToggle) {
+      mobileToggle.style.display = 'flex';
+    }
+    
+    // Adjust certificate grid for mobile
+    const certGrid = document.querySelector('.cert-3d-grid');
+    if (certGrid) {
+      certGrid.style.padding = '0 20px';
+    }
+    
+    // Reduce animation speeds on mobile for better performance
+    document.documentElement.style.setProperty('--animation-speed', '0.3s');
+  } else {
+    // Desktop optimizations
+    const mobileToggle = document.getElementById('mobile-nav-toggle');
+    if (mobileToggle) {
+      mobileToggle.style.display = 'none';
+    }
+    
+    const mobileNav = document.getElementById('mobile-nav-menu');
+    if (mobileNav) {
+      mobileNav.style.display = 'none';
+    }
+    
+    // Show desktop navigation
+    const topNav = document.querySelector('.top-nav');
+    if (topNav) {
+      topNav.style.display = 'flex';
+    }
+    
+    document.documentElement.style.setProperty('--animation-speed', '0.2s');
+  }
+}
+
+// Initial mobile optimization
+optimizeForMobile();
+
+// Update on resize
+window.addEventListener('resize', optimizeForMobile);
+
+// === ACTIVE NAVIGATION HIGHLIGHTING ===
+function updateActiveNav() {
+  const sections = document.querySelectorAll('section');
+  const navLinks = document.querySelectorAll('.top-nav a, .mobile-nav-link');
+  
+  let current = '';
+  const scrollPos = window.scrollY + 100;
+  
+  sections.forEach(section => {
+    const sectionTop = section.offsetTop;
+    const sectionHeight = section.clientHeight;
+    
+    if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+      current = section.getAttribute('id');
+    }
+  });
+  
+  navLinks.forEach(link => {
+    link.classList.remove('active');
+    if (link.getAttribute('href') === `#${current}`) {
+      link.classList.add('active');
+    }
+  });
+}
+
+// Update active nav on scroll
+window.addEventListener('scroll', updateActiveNav);
+
+// Initial update
+setTimeout(updateActiveNav, 100);
+
+// === MOBILE GESTURE SUPPORT ===
+// Swipe support for mobile certificate viewing
+let touchStartX = 0;
+let touchEndX = 0;
+
+document.addEventListener('touchstart', (e) => {
+  touchStartX = e.changedTouches[0].screenX;
+});
+
+document.addEventListener('touchend', (e) => {
+  touchEndX = e.changedTouches[0].screenX;
+  handleSwipe();
+});
+
+function handleSwipe() {
+  const swipeThreshold = 50;
+  const swipeDistance = touchEndX - touchStartX;
+  
+  if (Math.abs(swipeDistance) > swipeThreshold) {
+    if (swipeDistance > 0) {
+      // Swipe right - previous
+      console.log('Swiped right');
+    } else {
+      // Swipe left - next
+      console.log('Swiped left');
     }
   }
+}
 
-  // --- 11. SMOOTH SCROLL FOR NAVIGATION LINKS ---
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-      e.preventDefault();
-      
-      const targetId = this.getAttribute('href');
-      if (targetId === '#') return;
-      
-      const targetElement = document.querySelector(targetId);
-      if (targetElement) {
-        window.scrollTo({
-          top: targetElement.offsetTop - 80,
-          behavior: 'smooth'
-        });
+// === PERFORMANCE OPTIMIZATIONS ===
+// Debounce resize events
+let resizeTimeout;
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimeout);
+  resizeTimeout = setTimeout(optimizeForMobile, 250);
+});
+
+// Lazy load images
+if ('IntersectionObserver' in window) {
+  const imageObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const img = entry.target;
+        img.src = img.dataset.src;
+        imageObserver.unobserve(img);
       }
     });
   });
+  
+  document.querySelectorAll('img[data-src]').forEach(img => {
+    imageObserver.observe(img);
+  });
+}
 
-  // === 12. CERTIFICATE SCROLL ANIMATIONS - ONE BY ONE ZIGZAG ===
-  function initCertificateAnimations() {
-    const certificatesSection = document.getElementById('certificates');
-    if (!certificatesSection) return;
-    
-    const certificateCards = document.querySelectorAll('.certificate-card');
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    const statItems = document.querySelectorAll('.stat-item');
-    const sectionHeader = document.querySelector('.section-header h2');
-    const sectionSubtitle = document.querySelector('.section-subtitle');
-    const viewAllContainer = document.querySelector('.view-all-container');
-    
-    // Reset all certificates to initial hidden state
-    certificateCards.forEach((card, index) => {
-      card.classList.remove('animate-in');
-      card.style.opacity = '0';
-      card.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
-      
-      // Set initial zigzag positions
-      if (index % 2 === 0) {
-        // Even index (0, 2, 4...): slide from left
-        card.style.transform = 'translateX(-150px) translateY(20px) rotate(-2deg)';
-      } else {
-        // Odd index (1, 3, 5...): slide from right
-        card.style.transform = 'translateX(150px) translateY(20px) rotate(2deg)';
-      }
-    });
-    
-    // Create Intersection Observer
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const section = entry.target;
-          
-          if (section.id === 'certificates') {
-            // Add in-view class for section fade-in
-            section.classList.add('in-view');
-            
-            // Animate header
-            setTimeout(() => {
-              if (sectionHeader) {
-                sectionHeader.style.opacity = '0';
-                sectionHeader.style.transform = 'translateY(-30px)';
-                sectionHeader.classList.add('animate-in');
-              }
-            }, 100);
-            
-            // Animate subtitle
-            setTimeout(() => {
-              if (sectionSubtitle) {
-                sectionSubtitle.style.opacity = '0';
-                sectionSubtitle.style.transform = 'translateY(20px)';
-                sectionSubtitle.classList.add('animate-in');
-              }
-            }, 300);
-            
-            // Animate stats
-            setTimeout(() => {
-              statItems.forEach((stat, index) => {
-                setTimeout(() => {
-                  stat.style.opacity = '0';
-                  stat.style.transform = 'translateY(30px)';
-                  stat.classList.add('animate-in');
-                }, index * 100);
-              });
-            }, 500);
-            
-            // Animate filter buttons
-            setTimeout(() => {
-              filterButtons.forEach((btn, index) => {
-                setTimeout(() => {
-                  btn.style.opacity = '0';
-                  btn.style.transform = 'translateY(20px)';
-                  btn.classList.add('animate-in');
-                }, index * 100);
-              });
-            }, 700);
-            
-            // Animate certificate cards ONE BY ONE with zigzag pattern
-            setTimeout(() => {
-              animateCertificatesOneByOne();
-            }, 900);
-            
-            // Animate view all button (after all certificates)
-            const totalAnimationTime = certificateCards.length * 300 + 1200;
-            setTimeout(() => {
-              if (viewAllContainer) {
-                viewAllContainer.style.opacity = '0';
-                viewAllContainer.style.transform = 'translateY(40px)';
-                viewAllContainer.classList.add('animate-in');
-              }
-            }, totalAnimationTime);
-            
-            // Start stats counter animation
-            animateStats();
-            
-            // Unobserve after animation starts
-            observer.unobserve(section);
-          }
-        }
-      });
-    }, {
-      threshold: 0.15, // Trigger when 15% of the section is visible
-      rootMargin: '0px 0px -100px 0px' // Trigger 100px before the section
-    });
-    
-    // Observe the certificates section
-    observer.observe(certificatesSection);
-    
-    // Re-animate filtered certificates
-    if (filterButtons.length > 0) {
-      filterButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
-          // Remove animation class from all cards
-          certificateCards.forEach(card => {
-            card.classList.remove('animate-in');
-            // Reset transform for hidden cards
-            const index = Array.from(certificateCards).indexOf(card);
-            if (card.style.display === 'none' || card.style.display === '') {
-              if (index % 2 === 0) {
-                card.style.transform = 'translateX(-150px) translateY(20px) rotate(-2deg)';
-              } else {
-                card.style.transform = 'translateX(150px) translateY(20px) rotate(2deg)';
-              }
-              card.style.opacity = '0';
-            }
-          });
-          
-          // Re-add animation class to visible cards ONE BY ONE
-          setTimeout(() => {
-            const visibleCards = Array.from(document.querySelectorAll('.certificate-card')).filter(card => 
-              card.style.display !== 'none' && card.style.display !== ''
-            );
-            
-            visibleCards.forEach((card, index) => {
-              setTimeout(() => {
-                card.classList.add('animate-in');
-                card.style.opacity = '1';
-                card.style.transform = 'translateX(0) translateY(0) rotate(0deg)';
-              }, index * 300); // 300ms delay between each card
-            });
-          }, 100);
-        });
-      });
-    }
-  }
+// === INITIALIZE ===
+// Run after DOM is loaded
+setTimeout(() => {
+  // Add loaded class for animations
+  document.body.classList.add('loaded');
   
-  // Function to animate certificates one by one
-  function animateCertificatesOneByOne() {
-    const certificateCards = document.querySelectorAll('.certificate-card');
-    
-    // Reset all cards to hidden (just in case)
-    certificateCards.forEach((card, index) => {
-      card.classList.remove('animate-in');
-      card.style.opacity = '0';
-      card.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
-      
-      // Set initial zigzag positions
-      if (index % 2 === 0) {
-        // Even index (0, 2, 4...): slide from left
-        card.style.transform = 'translateX(-150px) translateY(20px) rotate(-2deg)';
-      } else {
-        // Odd index (1, 3, 5...): slide from right
-        card.style.transform = 'translateX(150px) translateY(20px) rotate(2deg)';
-      }
-    });
-    
-    // Animate each card one by one with delay
-    certificateCards.forEach((card, index) => {
-      setTimeout(() => {
-        card.classList.add('animate-in');
-        card.style.opacity = '1';
-        card.style.transform = 'translateX(0) translateY(0) rotate(0deg)';
-      }, index * 300); // 300ms delay between each card
-    });
-  }
+  // Check and optimize for current device
+  optimizeForMobile();
+}, 100);
+});
+
+// === AUTO-DETECT CERTIFICATE ORIENTATION ===
+function detectCertificateOrientation() {
+  const certImages = document.querySelectorAll('.cert-img');
   
-  // Initialize certificate animations
-  initCertificateAnimations();
+  certImages.forEach(img => {
+    // Create a new image to check dimensions without loading in DOM
+    const tempImg = new Image();
+    tempImg.src = img.src;
+    
+    tempImg.onload = function() {
+      const width = tempImg.naturalWidth;
+      const height = tempImg.naturalHeight;
+      
+      // Remove any existing orientation classes
+      img.classList.remove('landscape', 'portrait');
+      
+      // Add appropriate class based on aspect ratio
+      if (width > height) {
+        img.classList.add('landscape');
+      } else {
+        img.classList.add('portrait');
+      }
+    };
+  });
+}
+
+// Run after page loads and whenever images are loaded
+window.addEventListener('load', detectCertificateOrientation);
+
+// Also run when DOM is ready
+document.addEventListener('DOMContentLoaded', function() {
+  setTimeout(detectCertificateOrientation, 1000); // Delay to ensure images are loaded
 });
