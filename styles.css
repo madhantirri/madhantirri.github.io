@@ -38,11 +38,17 @@ body {
    LAYOUT & COMPONENTS
    ========================================= */
 .profile-photo {
-  position: fixed; top: 20px; left: 20px; width: 5cm; height: 5cm;
-  border-radius: 50%; overflow: hidden;
+  position: fixed; 
+  top: 20px; 
+  left: 20px; 
+  width: 5cm; 
+  height: 5cm;
+  border-radius: 50%; 
+  overflow: hidden;
   border: 3px solid var(--accent-color);
   box-shadow: 0 0 15px var(--accent-color);
   z-index: 1001;
+  transition: opacity 0.3s ease;
 }
 .profile-photo img { width: 100%; height: 100%; object-fit: cover; }
 
@@ -58,17 +64,36 @@ body {
 .side-nav a:hover { color: var(--accent-color); background-color: rgba(125,125,125,0.1); }
 
 .social-links {
-  position: fixed; bottom: 20px; left: 20px; display: flex; gap: 25px; z-index: 1001;
+  position: fixed; 
+  bottom: 20px; 
+  left: 20px; 
+  display: flex; 
+  gap: 25px; 
+  z-index: 1001;
+  transition: opacity 0.3s ease;
 }
+
 .social-icon {
-  color: var(--text-color); font-size: 1.5rem; transition: 0.3s; width: 40px; height: 40px; display: inline-flex; align-items: center; justify-content: center;
+  color: var(--text-color); 
+  font-size: 1.5rem; 
+  transition: 0.3s; 
+  width: 40px; 
+  height: 40px; 
+  display: inline-flex; 
+  align-items: center; 
+  justify-content: center;
   cursor: none;
 }
 .social-icon:hover { color: var(--neon-red); }
 
 header {
-  height: 100vh; display: flex; justify-content: center; align-items: center;
-  flex-direction: column; text-align: center; padding-left: 6cm;
+  height: 100vh; 
+  display: flex; 
+  justify-content: center; 
+  align-items: center;
+  flex-direction: column; 
+  text-align: center; 
+  padding-left: 6cm;
 }
 header h1 { font-size: 4rem; margin: 0; animation: fadeIn 1s ease-in-out; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
@@ -96,6 +121,7 @@ h2::after {
   display: flex;
   align-items: center;
   gap: 20px;
+  transition: opacity 0.3s ease;
 }
 
 /* Top Navigation - Single Line */
@@ -396,9 +422,10 @@ h2::after {
   padding: 0 60px;
 }
 
+/* Updated for 9 certificates - adjust widths for better fit */
 .cert-item {
-  width: 45%;
-  margin-bottom: 80px;
+  width: 48%; /* Slightly smaller to accommodate more items */
+  margin-bottom: 60px; /* Reduced spacing */
   position: relative;
   z-index: 1;
   opacity: 0;
@@ -412,6 +439,10 @@ h2::after {
 .cert-item:nth-child(3) { animation-delay: 0.3s; }
 .cert-item:nth-child(4) { animation-delay: 0.4s; }
 .cert-item:nth-child(5) { animation-delay: 0.5s; }
+.cert-item:nth-child(6) { animation-delay: 0.6s; }
+.cert-item:nth-child(7) { animation-delay: 0.7s; }
+.cert-item:nth-child(8) { animation-delay: 0.8s; }
+.cert-item:nth-child(9) { animation-delay: 0.9s; }
 
 @keyframes slideUpFade {
   to {
@@ -420,18 +451,30 @@ h2::after {
   }
 }
 
+/* Adjusted item positions for 9 items */
 .item-right {
-  margin-top: 200px;
+  margin-top: 120px; /* Reduced from 200px */
 }
 
 .item-left {
   margin-top: 0;
 }
 
+/* Make odd items left, even items right */
+.cert-item:nth-child(odd) {
+  margin-left: 0;
+  margin-right: auto;
+}
+
+.cert-item:nth-child(even) {
+  margin-left: auto;
+  margin-right: 0;
+}
+
 .cert-content-wrapper {
   display: flex;
   align-items: center;
-  gap: 30px;
+  gap: 25px; /* Reduced gap */
   transform-style: preserve-3d;
 }
 
@@ -445,19 +488,20 @@ h2::after {
   flex-direction: column;
   justify-content: center;
   z-index: 2;
+  min-width: 200px; /* Ensure consistent width */
 }
 
 .cert-num {
   font-family: 'Orbitron', sans-serif;
-  font-size: 1rem;
+  font-size: 0.9rem; /* Slightly smaller */
   color: var(--muted-color);
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   display: block;
   letter-spacing: 2px;
 }
 
 .cert-name {
-  font-size: 2.5rem;
+  font-size: 2rem; /* Smaller font for more items */
   font-weight: 800;
   color: var(--text-color);
   line-height: 1.1;
@@ -474,7 +518,7 @@ h2::after {
   width: 100%;
   height: 2px;
   background: linear-gradient(90deg, var(--accent-color), transparent);
-  margin-top: 20px;
+  margin-top: 15px; /* Reduced margin */
   position: relative;
   transition: all 0.4s ease;
 }
@@ -502,9 +546,10 @@ h2::after {
   align-items: flex-end;
 }
 
+/* REMOVED FLIP CARD STYLES - Simple card only */
 .cert-card-3d {
-  width: 400px;
-  height: 280px;
+  width: 350px; /* Slightly smaller */
+  height: 250px; /* Slightly smaller */
   position: relative;
   border-radius: 8px;
   background: var(--card-bg);
@@ -1029,14 +1074,81 @@ body.theme-origami.dark-theme .cloud, body.theme-origami.dark-theme .cloud::afte
 /* =========================================
    CONTACT & FOOTER
    ========================================= */
+/* ... existing code ... */
+
 #contact {
   padding-left: 60px;
+  position: relative;
 }
 
-.contact-info ul { list-style: none; padding: 0; margin-top: 20px; }
-.contact-info li { margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
-.contact-info a { color: var(--accent-color); text-decoration: none; cursor: none; }
-footer { text-align: center; padding: 20px; margin-top: 50px; border-top: 1px solid var(--muted-color); color: var(--muted-color); }
+/* UPDATED: Stacks details vertically */
+.contact-info ul { 
+  list-style: none; 
+  padding: 0; 
+  margin-top: 20px; 
+  display: flex;
+  flex-direction: column; /* This makes them one by one */
+  gap: 20px;
+}
+
+.contact-info li { 
+  margin-bottom: 0; /* Managed by gap above */
+  display: flex; 
+  align-items: center; 
+  gap: 15px; 
+  font-size: 1.1rem; /* Slightly larger for readability */
+}
+
+/* ... existing code ... */
+
+.contact-info a { 
+  color: var(--accent-color); 
+  text-decoration: none; 
+  cursor: none; 
+  transition: all 0.3s ease;
+}
+
+.contact-info a:hover {
+  color: var(--neon-red);
+  transform: translateY(-2px);
+}
+
+/* Social links in contact section */
+.contact-social-links {
+  display: flex;
+  gap: 25px;
+  margin-top: 30px;
+  padding-top: 30px;
+  border-top: 1px solid rgba(var(--accent-color-rgb), 0.1);
+  width: 100%;
+  justify-content: flex-start;
+}
+
+.contact-social-links .social-icon {
+  font-size: 1.8rem;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(var(--accent-color-rgb), 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.contact-social-links .social-icon:hover {
+  background: var(--accent-color);
+  color: var(--bg-color);
+  transform: translateY(-5px) scale(1.1);
+}
+
+footer { 
+  text-align: center; 
+  padding: 20px; 
+  margin-top: 50px; 
+  border-top: 1px solid var(--muted-color); 
+  color: var(--muted-color); 
+}
 
 /* =========================================
    SIMPLE WELCOME TYPING ANIMATION
@@ -1364,12 +1476,12 @@ body:has(.cert-modal.active) {
    ========================================= */
 @media (max-width: 1200px) {
   .cert-card-3d {
-    width: 350px;
-    height: 250px;
+    width: 320px;
+    height: 230px;
   }
   
   .cert-name {
-    font-size: 2.2rem;
+    font-size: 1.8rem;
   }
   
   .section-header-left,
@@ -1387,6 +1499,10 @@ body:has(.cert-modal.active) {
   .filter-btn {
     min-width: 130px;
     padding: 10px 20px;
+  }
+  
+  .cert-item {
+    width: 48%;
   }
 }
 
@@ -1636,6 +1752,27 @@ body:has(.cert-modal.active) {
   #modal-cert-title {
     font-size: 2rem;
   }
+  
+  /* Contact section mobile */
+  .contact-info ul {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .contact-info li {
+    min-width: auto;
+  }
+  
+  .contact-social-links {
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .contact-social-links .social-icon {
+    width: 45px;
+    height: 45px;
+    font-size: 1.5rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -1839,6 +1976,7 @@ body:has(.cert-modal.active) {
   border: 1px solid rgba(255, 255, 255, 0.1);
   pointer-events: none; /* Don't interfere with clicks */
 }
+
 /* =========================================
    FAST CURSOR STYLES
    ========================================= */
@@ -1893,384 +2031,6 @@ body:active .cursor-dot {
 
 body:active .cursor-outline {
   transform: translate(-50%, -50%) scale(0.9);
-}
-
-/* =========================================
-   CERTIFICATE 3D FLIP EFFECTS
-   ========================================= */
-.cert-card-3d {
-  width: 400px;
-  height: 280px;
-  position: relative;
-  border-radius: 12px;
-  background: var(--card-bg);
-  transform-style: preserve-3d;
-  transform: translateZ(0);
-  transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1), 
-              box-shadow 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-  box-shadow: 
-    0 15px 40px rgba(0, 0, 0, 0.25),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(var(--accent-color-rgb), 0.15);
-  overflow: hidden;
-  cursor: pointer;
-}
-
-.cert-card-3d.flipped {
-  transform: perspective(1000px) rotateY(180deg);
-}
-
-.cert-card-front,
-.cert-card-back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
-  border-radius: 12px;
-  overflow: hidden;
-}
-
-.cert-card-front {
-  background: var(--card-bg);
-  z-index: 2;
-}
-
-.cert-card-back {
-  background: linear-gradient(135deg, rgba(var(--accent-color-rgb), 0.1), rgba(var(--accent-color-rgb), 0.05));
-  transform: rotateY(180deg);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 30px;
-  text-align: center;
-  color: var(--text-color);
-}
-
-.cert-card-back h4 {
-  font-size: 1.5rem;
-  margin-bottom: 15px;
-  color: var(--accent-color);
-}
-
-.cert-card-back p {
-  font-size: 0.9rem;
-  line-height: 1.6;
-  opacity: 0.9;
-  margin-bottom: 20px;
-}
-
-.cert-flip-icon {
-  font-size: 2rem;
-  color: var(--accent-color);
-  margin-top: 20px;
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.1); }
-}
-
-/* =========================================
-   CERTIFICATE SLIDER
-   ========================================= */
-.cert-slider-container {
-  position: relative;
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  overflow: hidden;
-  border-radius: 16px;
-  background: rgba(var(--accent-color-rgb), 0.05);
-  padding: 40px 0;
-}
-
-.cert-slider-track {
-  display: flex;
-  transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-}
-
-.cert-slider-slide {
-  min-width: 100%;
-  padding: 0 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.slider-nav {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 50px;
-  height: 50px;
-  background: var(--card-bg);
-  border: none;
-  border-radius: 50%;
-  color: var(--text-color);
-  font-size: 1.5rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 10;
-  transition: all 0.3s ease;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-}
-
-.slider-nav:hover {
-  background: var(--accent-color);
-  color: var(--bg-color);
-  transform: translateY(-50%) scale(1.1);
-}
-
-.slider-prev {
-  left: 20px;
-}
-
-.slider-next {
-  right: 20px;
-}
-
-.slider-dots {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 30px;
-}
-
-.slider-dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: rgba(var(--accent-color-rgb), 0.3);
-  border: none;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.slider-dot:hover {
-  background: rgba(var(--accent-color-rgb), 0.6);
-}
-
-.slider-dot.active {
-  background: var(--accent-color);
-  transform: scale(1.2);
-}
-
-/* =========================================
-   CERTIFICATE TRANSITIONS
-   ========================================= */
-.cert-item {
-  width: 45%;
-  margin-bottom: 80px;
-  position: relative;
-  z-index: 1;
-  opacity: 0;
-  transform: translateY(30px);
-  animation: slideUpFade 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards;
-}
-
-.cert-item:nth-child(1) { animation-delay: 0.1s; }
-.cert-item:nth-child(2) { animation-delay: 0.2s; }
-.cert-item:nth-child(3) { animation-delay: 0.3s; }
-.cert-item:nth-child(4) { animation-delay: 0.4s; }
-.cert-item:nth-child(5) { animation-delay: 0.5s; }
-
-@keyframes slideUpFade {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Slide transition for filter changes */
-@keyframes slideOut {
-  from {
-    opacity: 1;
-    transform: translateX(0);
-  }
-  to {
-    opacity: 0;
-    transform: translateX(-20px);
-  }
-}
-
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateX(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-.cert-item.filter-out {
-  animation: slideOut 0.3s ease forwards;
-}
-
-.cert-item.filter-in {
-  animation: slideIn 0.4s ease forwards;
-}
-
-/* =========================================
-   FAST INTERACTIVE ELEMENTS
-   ========================================= */
-/* Certificate items fast hover */
-.cert-item:hover .cert-card-3d {
-  transform: perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1.05, 1.05, 1.05);
-  box-shadow: 
-    0 25px 70px rgba(0, 0, 0, 0.35),
-    inset 0 1px 0 rgba(255, 255, 255, 0.15);
-  border-color: rgba(var(--accent-color-rgb), 0.3);
-  transition: all 0.25s cubic-bezier(0.23, 1, 0.32, 1);
-}
-
-.cert-item:hover .cert-img {
-  transform: scale(1.05);
-  transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-}
-
-/* Social icons fast hover */
-.social-icon {
-  transition: transform 0.2s ease, color 0.2s ease;
-}
-
-.social-icon:hover {
-  transform: translateY(-3px) scale(1.1);
-  color: var(--neon-red);
-}
-
-/* Navigation fast hover */
-.top-nav a {
-  transition: all 0.2s ease;
-}
-
-.top-nav a:hover {
-  transform: translateY(-2px);
-  color: var(--accent-color);
-}
-
-/* Settings button fast hover */
-#settings-trigger {
-  transition: transform 0.2s ease, background-color 0.2s ease;
-}
-
-#settings-trigger:hover {
-  transform: rotate(90deg) scale(1.1);
-}
-
-/* Modal fast animations */
-.cert-modal-content {
-  transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-}
-
-.cert-modal-close {
-  transition: all 0.2s ease;
-}
-
-.cert-modal-link {
-  transition: all 0.2s ease;
-}
-
-/* Skills faster animation */
-.skill-item {
-  transition: transform 0.2s ease;
-}
-
-.skill-item:hover {
-  transform: translateY(-5px);
-}
-
-.skill-icon {
-  transition: all 0.2s ease;
-}
-
-/* =========================================
-   RESPONSIVE ADJUSTMENTS FOR FLIP CARDS
-   ========================================= */
-@media (max-width: 768px) {
-  .cert-card-3d {
-    width: 100%;
-    height: 220px;
-  }
-  
-  .cert-card-back {
-    padding: 20px;
-  }
-  
-  .cert-card-back h4 {
-    font-size: 1.2rem;
-  }
-  
-  .cert-card-back p {
-    font-size: 0.8rem;
-  }
-  
-  .cert-flip-icon {
-    font-size: 1.5rem;
-  }
-  
-  .slider-nav {
-    width: 40px;
-    height: 40px;
-    font-size: 1.2rem;
-  }
-  
-  .cert-slider-slide {
-    padding: 0 20px;
-  }
-}
-
-/* =========================================
-   CURSOR VISIBILITY FIXES
-   ========================================= */
-/* Ensure cursor is visible immediately on interactive elements */
-a, button, .cert-item, .skill-nav-btn, .settings-menu button,
-.cert-modal-close, .cert-modal-link, .slider-nav {
-  cursor: none !important;
-}
-
-/* Fast cursor response on hover */
-.cert-item:hover ~ .cursor-outline {
-  width: 60px !important;
-  height: 60px !important;
-  background-color: rgba(var(--accent-color-rgb), 0.2) !important;
-}
-
-/* Modal cursor fix */
-body:has(.cert-modal.active) a,
-body:has(.cert-modal.active) button,
-body:has(.cert-modal.active) .cert-modal-close,
-body:has(.cert-modal.active) .cert-modal-link {
-  cursor: pointer !important;
-}
-
-/* Fast load animations */
-.cert-item {
-  animation: slideUpFade 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards;
-}
-
-/* Smooth scroll behavior */
-html {
-  scroll-behavior: smooth;
-}
-
-/* Fast fade in for sections */
-section {
-  animation: fadeIn 0.8s ease-out forwards;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
 }
 
 /* =========================================
@@ -2573,25 +2333,7 @@ body.mobile .cursor-outline {
     width: 100px !important;
   }
   
-  /* Certificate flip card mobile adjustments */
-  .cert-card-back {
-    padding: 20px;
-  }
-  
-  .cert-card-back h4 {
-    font-size: 1.3rem;
-    margin-bottom: 10px;
-  }
-  
-  .cert-card-back p {
-    font-size: 0.9rem;
-    margin-bottom: 15px;
-  }
-  
-  .cert-flip-icon {
-    font-size: 1.5rem;
-    margin-top: 10px;
-  }
+  /* Certificate flip card mobile adjustments - REMOVED */
   
   /* Skills section mobile fixes */
   #skills {
@@ -2796,12 +2538,12 @@ body.mobile .cursor-outline {
   }
   
   .cert-card-3d {
-    width: 350px;
-    height: 250px;
+    width: 320px;
+    height: 230px;
   }
   
   .cert-name {
-    font-size: 2rem;
+    font-size: 1.8rem;
   }
   
   .mobile-nav-toggle {
